@@ -8,7 +8,8 @@ var isAttacking = false
 var direccion = "right"
 
 func _physics_process(delta):
-	move_character(delta)
+	if (!isAttacking):
+		move_character(delta)
 	update_animations()
 	attack()
 
@@ -44,23 +45,24 @@ func attack():
 func move_character(delta):
 	var input_direction = Input.get_vector("move_left", "move_right", "move_up", "move_bottom")
 	velocity = input_direction * SPEED
-	move_and_collide(velocity * delta)
+	move_and_slide()
+	#move_and_collide(velocity * delta)
 	getDirection(input_direction)
 	
 func getDirection(input_direction):
 	if abs(input_direction.x) > abs(input_direction.y):
 		if input_direction.x > 0:
-			print("right")
+			#print("right")
 			direccion = "right"			
 		elif input_direction.x < 0:
-			print("left")
+			#print("left")
 			direccion = "left"
 	else:
 		if input_direction.y < 0:
-			print("up")
+			#print("up")
 			direccion = "up"
 		elif input_direction.y > 0:
-			print("down")
+			#print("down")
 			direccion = "down"
 
 

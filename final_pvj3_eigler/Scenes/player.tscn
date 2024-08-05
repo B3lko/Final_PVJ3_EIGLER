@@ -383,18 +383,18 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mdbt0"]
-size = Vector2(34, 48)
+size = Vector2(34, 40)
 
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_yfkwf")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_mmpbr")
-animation = &"attack_up_02"
+animation = &"walk"
 autoplay = "idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -5)
+position = Vector2(0, 16)
 shape = SubResource("RectangleShape2D_mdbt0")
 
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
