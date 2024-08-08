@@ -11,9 +11,14 @@ config_version=5
 [application]
 
 config/name="FINAL_PVJ3_EIGLER"
-run/main_scene="res://Scenes/main.tscn"
+run/main_scene="res://Scenes/Level_01.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
 config/icon="res://icon.svg"
+
+[display]
+
+window/size/viewport_width=1600
+window/size/viewport_height=900
 
 [input]
 
