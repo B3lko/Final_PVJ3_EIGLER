@@ -1,11 +1,23 @@
 extends CharacterBody2D
 
+var HealthBar: Node = null
 @export var SPEED: float = 200
 @onready var animated_sprite = $AnimatedSprite2D
-
 var isAttacking = false
-
 var direccion = "right"
+var life = 100;
+
+func _ready():
+	var HealthBars = get_tree().get_nodes_in_group("HealthBar")
+	if HealthBars.size() > 0:
+		HealthBar = HealthBars[0]
+
+
+func GetDamage(damage):
+	HealthBar.update_health_bar(damage)
+	life -= damage
+	if(life <= 0):
+		print("Character is dead")
 
 func _physics_process(delta):
 	if (!isAttacking):
@@ -13,7 +25,7 @@ func _physics_process(delta):
 	update_animations()
 	attack()
 
-func attack():			
+func attack():
 	if (Input.is_action_pressed("attack") && !isAttacking):
 		isAttacking = true
 		

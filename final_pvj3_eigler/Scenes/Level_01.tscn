@@ -1,10 +1,15 @@
-[gd_scene load_steps=11 format=3 uid="uid://wglv0isnhycm"]
+[gd_scene load_steps=18 format=3 uid="uid://wglv0isnhycm"]
 
 [ext_resource type="PackedScene" uid="uid://df57ph0k7sgcc" path="res://Scenes/player.tscn" id="1_o8k6m"]
 [ext_resource type="Texture2D" uid="uid://c0lu7yes65ugt" path="res://Assets/Sprites/Tilemap_Elevation.png" id="2_4uqqt"]
 [ext_resource type="Texture2D" uid="uid://bhvs1b861057i" path="res://Assets/Sprites/Tilemap_Flat.png" id="2_t46f1"]
 [ext_resource type="Texture2D" uid="uid://mn6kqm8g3m2w" path="res://Assets/Sprites/Water.png" id="3_iia5k"]
 [ext_resource type="Texture2D" uid="uid://naikj7qmx5jj" path="res://Assets/Sprites/Foam.png" id="4_6ow1x"]
+[ext_resource type="Texture2D" uid="uid://jfk2rtfngy6l" path="res://Assets/Sprites/UI/Health_01.png" id="6_rygfu"]
+[ext_resource type="PackedScene" uid="uid://dgs42yeyik5kh" path="res://Scenes/goblin_enemy.tscn" id="7_3txin"]
+[ext_resource type="Texture2D" uid="uid://dnhuucnj5wakj" path="res://Assets/Sprites/UI/Sprite-0001.png" id="7_xl6qv"]
+[ext_resource type="Texture2D" uid="uid://cejafu083ud1l" path="res://Assets/Sprites/UI/Heart_Red_1.png" id="9_ehg5l"]
+[ext_resource type="Script" path="res://Scenes/texture_progress_bar.gd" id="9_y8v4j"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_qw0yp"]
 texture = ExtResource("2_4uqqt")
@@ -122,10 +127,6 @@ texture_region_size = Vector2i(64, 64)
 13:5/0 = 0
 14:5/0 = 0
 15:5/0 = 0
-0:6/0 = 0
-1:6/0 = 0
-2:6/0 = 0
-3:6/0 = 0
 4:6/0 = 0
 5:6/0 = 0
 6:6/0 = 0
@@ -595,6 +596,11 @@ sources/1 = SubResource("TileSetAtlasSource_rl5ym")
 sources/2 = SubResource("TileSetAtlasSource_hkjlf")
 sources/6 = SubResource("TileSetAtlasSource_feucg")
 
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_r5vax"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_5fn4i"]
+texture = ExtResource("7_xl6qv")
+
 [node name="Node2D" type="Node2D"]
 
 [node name="TileMap" type="TileMap" parent="."]
@@ -608,8 +614,51 @@ layer_1/tile_data = PackedInt32Array(1114110, 2, 0, 1114111, 2, 0, 1048576, 2, 0
 layer_2/name = "Layer_Foam"
 layer_2/tile_data = PackedInt32Array(983036, 65542, 2, 983037, 65542, 2, 983038, 65542, 2, 983039, 65542, 2, 917504, 65542, 2, 917505, 65542, 2, 917506, 65542, 2, 917507, 65542, 2, 917508, 65542, 2, 917509, 65542, 2, 917510, 65542, 2, 917511, 65542, 2, 917512, 65542, 2, 917513, 65542, 2, 917514, 65542, 2, 917515, 65542, 2, 917516, 65542, 2, 917517, 65542, 2, 917518, 65542, 2, 917519, 65542, 2, 917520, 65542, 2, 917521, 65542, 2, 917522, 65542, 2, 917523, 65542, 2, 917524, 65542, 2, 917500, 65542, 1, 917501, 65542, 1, 917502, 65542, 1, 917503, 65542, 1, 851968, 65542, 1, 851969, 65542, 1, 851970, 65542, 1, 851971, 65542, 1, 851972, 65542, 1, 851973, 65542, 1, 851974, 65542, 1, 851975, 65542, 1, 851976, 65542, 1, 851977, 65542, 1, 851978, 65542, 1, 851979, 65542, 1, 851980, 65542, 1, 851981, 65542, 1, 851982, 65542, 1, 851983, 65542, 1, 851984, 65542, 1, 851985, 65542, 1, 851986, 65542, 1, 851987, 65542, 1, 851988, 65542, 1, 851989, 131078, 1, 786453, 131078, 1, 720917, 131078, 1, 655381, 131078, 1, 589845, 131078, 1, 524309, 131078, 1, 458773, 131078, 1, 393237, 131078, 1, 327701, 131078, 1, 262165, 131078, 1, 196629, 131078, 1, 131093, 131078, 1, 65557, 131078, 1, 786452, 65542, 1, 720916, 65542, 1, 655380, 65542, 1, 589844, 65542, 1, 524308, 65542, 1, 458772, 65542, 1, 393236, 65542, 1, 65556, 65542, 1, 131092, 65542, 1, 196628, 65542, 1, 262164, 65542, 1, 327700, 65542, 1, 851964, 65542, 1, 786428, 65542, 1, 720892, 65542, 1, 655356, 65542, 1, 589820, 65542, 1, 524284, 65542, 1, 458748, 65542, 1, 393212, 65542, 1, 327676, 65542, 1, 131068, 65542, 1, 196604, 65542, 1, 262140, 65542, 1, 131067, 6, 1, 196603, 6, 1, 262139, 6, 1, 327675, 6, 1, 393211, 6, 1, 458747, 6, 1, 524283, 6, 1, 589819, 6, 1, 655355, 6, 1, 720891, 6, 1, 786427, 6, 1, 851963, 6, 1, 917499, 6, 1, 65532, 65542, 1, 65533, 65542, 1, 65534, 65542, 1, 65535, 65542, 1, 0, 65542, 1, 1, 65542, 1, 2, 65542, 1, 3, 65542, 1, 4, 65542, 1, 5, 65542, 1, 6, 65542, 1, 7, 65542, 1, 8, 65542, 1, 9, 65542, 1, 10, 65542, 1, 11, 65542, 1, 12, 65542, 1, 13, 65542, 1, 14, 65542, 1, 15, 65542, 1, 16, 65542, 1, 17, 65542, 1, 18, 65542, 1, 19, 65542, 1, 20, 65542, 1, -4, 65542, 0, -3, 65542, 0, -2, 65542, 0, -1, 65542, 0, -65536, 65542, 0, -65535, 65542, 0, -65534, 65542, 0, -65533, 65542, 0, -65532, 65542, 0, -65531, 65542, 0, -65530, 65542, 0, -65529, 65542, 0, -65528, 65542, 0, -65527, 65542, 0, -65526, 65542, 0, -65525, 65542, 0, -65524, 65542, 0, -65523, 65542, 0, -65522, 65542, 0, -65521, 65542, 0, -65520, 65542, 0, -65519, 65542, 0, -65518, 65542, 0, -65517, 65542, 0, -65516, 65542, 0, 21, 131078, 1, 65531, 6, 1)
 
-[node name="Player" parent="." instance=ExtResource("1_o8k6m")]
+[node name="Player" parent="." groups=["Player"] instance=ExtResource("1_o8k6m")]
 z_index = 4
 position = Vector2(579, 228)
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer"]
+anchors_preset = -1
+anchor_left = 0.019
+anchor_top = 0.033
+anchor_right = 0.179
+anchor_bottom = 0.104
+offset_left = -0.400002
+offset_top = 0.299999
+offset_right = -192.4
+offset_bottom = -47.6
+scale = Vector2(4, 4)
+texture = ExtResource("6_rygfu")
+
+[node name="ProgressBar" type="ProgressBar" parent="CanvasLayer/TextureRect" groups=["HealthBar"]]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 16.22
+offset_top = 4.77
+offset_right = -2.78
+offset_bottom = -9.23
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/background = SubResource("StyleBoxEmpty_r5vax")
+theme_override_styles/fill = SubResource("StyleBoxTexture_5fn4i")
+value = 100.0
+show_percentage = false
+script = ExtResource("9_y8v4j")
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/TextureRect"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.25
+anchor_bottom = 1.0
+texture = ExtResource("9_ehg5l")
+
+[node name="Goblin_Enemy" parent="." instance=ExtResource("7_3txin")]
+z_index = 3
+position = Vector2(373, 596)
