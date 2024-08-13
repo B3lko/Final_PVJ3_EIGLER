@@ -1,5 +1,6 @@
-[gd_scene load_steps=18 format=3 uid="uid://wglv0isnhycm"]
+[gd_scene load_steps=22 format=3 uid="uid://wglv0isnhycm"]
 
+[ext_resource type="Script" path="res://Scenes/level_01.gd" id="1_hq6sg"]
 [ext_resource type="PackedScene" uid="uid://df57ph0k7sgcc" path="res://Scenes/player.tscn" id="1_o8k6m"]
 [ext_resource type="Texture2D" uid="uid://c0lu7yes65ugt" path="res://Assets/Sprites/Tilemap_Elevation.png" id="2_4uqqt"]
 [ext_resource type="Texture2D" uid="uid://bhvs1b861057i" path="res://Assets/Sprites/Tilemap_Flat.png" id="2_t46f1"]
@@ -10,6 +11,9 @@
 [ext_resource type="Texture2D" uid="uid://dnhuucnj5wakj" path="res://Assets/Sprites/UI/Sprite-0001.png" id="7_xl6qv"]
 [ext_resource type="Texture2D" uid="uid://cejafu083ud1l" path="res://Assets/Sprites/UI/Heart_Red_1.png" id="9_ehg5l"]
 [ext_resource type="Script" path="res://Scenes/texture_progress_bar.gd" id="9_y8v4j"]
+[ext_resource type="Texture2D" uid="uid://bh2c81ebarahc" path="res://Assets/Sprites/UI/Banner_Vertical.png" id="10_xrdwp"]
+[ext_resource type="Theme" uid="uid://c0bljv12kjjb" path="res://Scenes/MainMenu.tres" id="11_a3h46"]
+[ext_resource type="FontFile" uid="uid://c4ubi6ftcm5ix" path="res://Assets/Fonts/The Wild Breath of Zelda.otf" id="12_ketyt"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_qw0yp"]
 texture = ExtResource("2_4uqqt")
@@ -602,6 +606,7 @@ sources/6 = SubResource("TileSetAtlasSource_feucg")
 texture = ExtResource("7_xl6qv")
 
 [node name="Node2D" type="Node2D"]
+script = ExtResource("1_hq6sg")
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = SubResource("TileSet_87qnk")
@@ -659,6 +664,253 @@ anchor_right = 0.25
 anchor_bottom = 1.0
 texture = ExtResource("9_ehg5l")
 
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.588235)
+
+[node name="TextureRectLose" type="TextureRect" parent="CanvasLayer/ColorRect"]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.156
+anchor_top = 0.111
+anchor_right = 0.844
+anchor_bottom = 0.889
+offset_left = 0.399994
+offset_top = 0.0999908
+offset_right = -0.400024
+offset_bottom = -0.100037
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("10_xrdwp")
+
+[node name="Label" type="Label" parent="CanvasLayer/ColorRect/TextureRectLose"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.363
+anchor_top = 0.239
+anchor_right = 0.637
+anchor_bottom = 0.393
+offset_left = -0.300018
+offset_top = -0.300003
+offset_right = 0.299988
+offset_bottom = -0.100006
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("12_ketyt")
+theme_override_font_sizes/font_size = 80
+text = "¡You lost!"
+
+[node name="Button_Restart" type="Button" parent="CanvasLayer/ColorRect/TextureRectLose"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.341
+anchor_top = 0.529
+anchor_right = 0.477
+anchor_bottom = 0.636
+offset_left = -0.100037
+offset_top = -0.300018
+offset_right = 0.299988
+offset_bottom = -0.200012
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("11_a3h46")
+text = "Restart"
+
+[node name="Button_Menu" type="Button" parent="CanvasLayer/ColorRect/TextureRectLose"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.523
+anchor_top = 0.529
+anchor_right = 0.659
+anchor_bottom = 0.636
+offset_left = -0.299988
+offset_top = -0.300018
+offset_right = 0.0999756
+offset_bottom = -0.200012
+grow_horizontal = 2
+grow_vertical = 0
+theme = ExtResource("11_a3h46")
+text = "Menu"
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer/ColorRect/TextureRectLose"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="TextureRectWin" type="TextureRect" parent="CanvasLayer/ColorRect"]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.291
+anchor_top = 0.243
+anchor_right = 0.7
+anchor_bottom = 0.764
+offset_left = -215.6
+offset_top = -118.7
+offset_right = 230.0
+offset_bottom = 112.4
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("10_xrdwp")
+
+[node name="Label" type="Label" parent="CanvasLayer/ColorRect/TextureRectWin"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.363
+anchor_top = 0.239
+anchor_right = 0.637
+anchor_bottom = 0.393
+offset_left = -0.300018
+offset_top = -0.300003
+offset_right = 0.299988
+offset_bottom = -0.100006
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("12_ketyt")
+theme_override_font_sizes/font_size = 80
+text = "¡You win!"
+
+[node name="Button_Restart" type="Button" parent="CanvasLayer/ColorRect/TextureRectWin"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.287
+anchor_top = 0.529
+anchor_right = 0.424
+anchor_bottom = 0.636
+offset_left = 0.299988
+offset_top = -0.300018
+offset_right = -0.400024
+offset_bottom = -0.200012
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("11_a3h46")
+text = "Restart"
+
+[node name="Button_Menu" type="Button" parent="CanvasLayer/ColorRect/TextureRectWin"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.59
+anchor_top = 0.529
+anchor_right = 0.726
+anchor_bottom = 0.636
+offset_left = -6.10352e-05
+offset_top = -0.300018
+offset_right = 0.399963
+offset_bottom = -0.200012
+grow_horizontal = 2
+grow_vertical = 0
+theme = ExtResource("11_a3h46")
+text = "Menu"
+
+[node name="Button_Next" type="Button" parent="CanvasLayer/ColorRect/TextureRectWin"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.439
+anchor_top = 0.529
+anchor_right = 0.575
+anchor_bottom = 0.636
+offset_left = 0.0999756
+offset_top = -0.100006
+offset_right = 0.499939
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("11_a3h46")
+text = "Next"
+
+[node name="TextureRectPause" type="TextureRect" parent="CanvasLayer/ColorRect"]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.156
+anchor_top = 0.111
+anchor_right = 0.844
+anchor_bottom = 0.889
+offset_left = 0.399994
+offset_top = 0.0999908
+offset_right = -0.400024
+offset_bottom = -0.100098
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("10_xrdwp")
+
+[node name="Label" type="Label" parent="CanvasLayer/ColorRect/TextureRectPause"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.426
+anchor_top = 0.271
+anchor_right = 0.574
+anchor_bottom = 0.393
+offset_left = -0.100037
+offset_top = 0.300003
+offset_right = 0.0999756
+offset_bottom = -0.0999756
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("12_ketyt")
+theme_override_font_sizes/font_size = 80
+text = "Pause"
+
+[node name="Button_Restart" type="Button" parent="CanvasLayer/ColorRect/TextureRectPause"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.341
+anchor_top = 0.529
+anchor_right = 0.477
+anchor_bottom = 0.636
+offset_left = -0.100037
+offset_top = -0.299988
+offset_right = 0.299988
+offset_bottom = -0.199982
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("11_a3h46")
+text = "Restart"
+
+[node name="Button_Menu" type="Button" parent="CanvasLayer/ColorRect/TextureRectPause"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.523
+anchor_top = 0.529
+anchor_right = 0.659
+anchor_bottom = 0.636
+offset_left = -0.299988
+offset_top = -0.299988
+offset_right = 0.100037
+offset_bottom = -0.199951
+grow_horizontal = 2
+grow_vertical = 0
+theme = ExtResource("11_a3h46")
+text = "Menu"
+
+[node name="Label" type="Label" parent="CanvasLayer"]
+anchors_preset = -1
+anchor_left = 0.94
+anchor_top = 0.033
+anchor_right = 0.988
+anchor_bottom = 0.104
+offset_left = -0.00012207
+offset_top = 0.299999
+offset_right = -10.8
+offset_bottom = 0.400002
+grow_horizontal = 0
+theme_override_fonts/font = ExtResource("12_ketyt")
+theme_override_font_sizes/font_size = 60
+text = "60"
+
 [node name="Goblin_Enemy" parent="." instance=ExtResource("7_3txin")]
 z_index = 3
 position = Vector2(373, 596)
+
+[connection signal="pressed" from="CanvasLayer/ColorRect/TextureRectLose/Button_Restart" to="." method="_on_button_restart_pressed"]
+[connection signal="pressed" from="CanvasLayer/ColorRect/TextureRectLose/Button_Menu" to="." method="_on_button_menu_pressed"]
+[connection signal="pressed" from="CanvasLayer/ColorRect/TextureRectWin/Button_Restart" to="." method="_on_button_restart_pressed"]
+[connection signal="pressed" from="CanvasLayer/ColorRect/TextureRectWin/Button_Menu" to="." method="_on_button_menu_pressed"]
+[connection signal="pressed" from="CanvasLayer/ColorRect/TextureRectWin/Button_Next" to="." method="_on_button_menu_pressed"]
+[connection signal="pressed" from="CanvasLayer/ColorRect/TextureRectPause/Button_Restart" to="." method="_on_button_restart_pressed"]
+[connection signal="pressed" from="CanvasLayer/ColorRect/TextureRectPause/Button_Menu" to="." method="_on_button_menu_pressed"]

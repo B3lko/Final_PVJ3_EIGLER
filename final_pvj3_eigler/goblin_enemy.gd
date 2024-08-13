@@ -5,6 +5,7 @@ var player: Node = null
 var canAttack = false
 var isAttacking = false
 var damage = 10
+var pause_or_end = false
 
 func _ready():
 	var players = get_tree().get_nodes_in_group("Player")
@@ -13,8 +14,9 @@ func _ready():
 
 
 func _process(delta: float) -> void:
-	if(canAttack && !isAttacking):
-		Attack()
+	if !pause_or_end:
+		if(canAttack && !isAttacking):
+			Attack()
 
 
 func Attack():
@@ -52,3 +54,8 @@ func _on_animated_sprite_2d_animation_finished() -> void:
 			player.GetDamage(damage)
 		animated_sprite.play("Idle")
 		isAttacking = false
+
+
+func SET_pause_or_end(state):
+	pause_or_end = state
+

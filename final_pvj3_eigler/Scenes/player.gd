@@ -6,6 +6,9 @@ var HealthBar: Node = null
 var isAttacking = false
 var direccion = "right"
 var life = 100;
+var pause_or_end = false
+
+signal died
 
 func _ready():
 	var HealthBars = get_tree().get_nodes_in_group("HealthBar")
@@ -17,13 +20,15 @@ func GetDamage(damage):
 	HealthBar.update_health_bar(damage)
 	life -= damage
 	if(life <= 0):
+		emit_signal("died")
 		print("Character is dead")
 
 func _physics_process(delta):
-	if (!isAttacking):
-		move_character(delta)
-	update_animations()
-	attack()
+	if !pause_or_end:
+		if (!isAttacking):
+			move_character(delta)
+		update_animations()
+		attack()
 
 func attack():
 	if (Input.is_action_pressed("attack") && !isAttacking):
@@ -100,3 +105,7 @@ func _on_animated_sprite_2d_animation_finished() -> void:
 	|| animated_sprite.animation == "attack_up_02"):
 		isAttacking = false
 		animated_sprite.play("idle")	
+
+
+func SET_pause_or_end(state):
+	pause_or_end = state
