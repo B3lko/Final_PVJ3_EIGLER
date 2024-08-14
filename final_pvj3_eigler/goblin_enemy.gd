@@ -6,6 +6,8 @@ var canAttack = false
 var isAttacking = false
 var damage = 10
 var pause_or_end = false
+var life = 100
+
 
 func _ready():
 	var players = get_tree().get_nodes_in_group("Player")
@@ -17,6 +19,13 @@ func _process(delta: float) -> void:
 	if !pause_or_end:
 		if(canAttack && !isAttacking):
 			Attack()
+
+
+func GetDamage(gdamage):
+	life -= gdamage
+	print("Goblin life: " , life)
+	if(life <= 0):
+		print("goblin is dead")
 
 
 func Attack():

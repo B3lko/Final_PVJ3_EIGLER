@@ -9,7 +9,7 @@ var scene_Level_01 = load("res://Scenes/Level_01.tscn")
 @onready var label = $CanvasLayer/Label
 @onready var player = $Player
 
-var time_left: int = 10
+var time_left: int = 1000
 var level_finished = false
 var paused_timer_time: float = 0.0
 

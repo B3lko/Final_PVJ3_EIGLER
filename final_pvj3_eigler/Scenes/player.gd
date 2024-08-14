@@ -7,13 +7,20 @@ var isAttacking = false
 var direccion = "right"
 var life = 100;
 var pause_or_end = false
+var m_damage = 20 
+
+var enemies_in_area: Array = []
 
 signal died
+
+@onready var CS2DAttack = $Area2D/CollisionShape2D
 
 func _ready():
 	var HealthBars = get_tree().get_nodes_in_group("HealthBar")
 	if HealthBars.size() > 0:
 		HealthBar = HealthBars[0]
+	CS2DAttack.shape.extents = Vector2(75, 30)
+	CS2DAttack.position = Vector2(35, 0)
 
 
 func GetDamage(damage):
@@ -30,10 +37,14 @@ func _physics_process(delta):
 		update_animations()
 		attack()
 
+
 func attack():
 	if (Input.is_action_pressed("attack") && !isAttacking):
 		isAttacking = true
-		
+		for body in enemies_in_area:
+			if body.has_method("GetDamage"):
+				body.GetDamage(m_damage)
+				
 		#Ataque arriva
 		if (direccion == "up"):
 			var random_number = randi() % 2 + 1
@@ -49,15 +60,15 @@ func attack():
 				animated_sprite.play("attack_down_01")
 			else:
 				animated_sprite.play("attack_down_02")
-
-		#Ataque de izquierda o derecha
-		if (direccion == "right" || direccion == "left"):
+				
+		#Ataque de izquierda y/o derecha
+		if (direccion == "left" || direccion == "right"):
 			var random_number = randi() % 2 + 1
 			if(random_number == 1):
 				animated_sprite.play("attack_01")
 			else:
 				animated_sprite.play("attack_02")
-	
+
 
 func move_character(delta):
 	var input_direction = Input.get_vector("move_left", "move_right", "move_up", "move_bottom")
@@ -69,17 +80,21 @@ func move_character(delta):
 func getDirection(input_direction):
 	if abs(input_direction.x) > abs(input_direction.y):
 		if input_direction.x > 0:
-			#print("right")
-			direccion = "right"			
+			CS2DAttack.shape.extents = Vector2(75, 30)
+			CS2DAttack.position = Vector2(35, 0)
+			direccion = "right"
 		elif input_direction.x < 0:
-			#print("left")
+			CS2DAttack.shape.extents = Vector2(75, 30)
+			CS2DAttack.position = Vector2(-35, 0)
 			direccion = "left"
 	else:
 		if input_direction.y < 0:
-			#print("up")
+			CS2DAttack.shape.extents = Vector2(30, 75)
+			CS2DAttack.position = Vector2(0, -35)
 			direccion = "up"
 		elif input_direction.y > 0:
-			#print("down")
+			CS2DAttack.shape.extents = Vector2(30, 75)
+			CS2DAttack.position = Vector2(0, 35)
 			direccion = "down"
 
 
@@ -109,3 +124,14 @@ func _on_animated_sprite_2d_animation_finished() -> void:
 
 func SET_pause_or_end(state):
 	pause_or_end = state
+
+
+func _on_area_2d_body_entered(body: Node2D) -> void:
+	if (body.is_in_group("enemies")):
+		enemies_in_area.append(body)
+
+
+func _on_area_2d_body_exited(body: Node2D) -> void:
+	if enemies_in_area.has(body):
+		enemies_in_area.erase(body)
+
