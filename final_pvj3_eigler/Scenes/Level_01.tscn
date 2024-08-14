@@ -738,11 +738,6 @@ grow_vertical = 0
 theme = ExtResource("11_a3h46")
 text = "Menu"
 
-[node name="ColorRect" type="ColorRect" parent="CanvasLayer/ColorRect/TextureRectLose"]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
 [node name="TextureRectWin" type="TextureRect" parent="CanvasLayer/ColorRect"]
 visible = false
 layout_mode = 1

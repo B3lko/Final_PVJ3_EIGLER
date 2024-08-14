@@ -15,6 +15,9 @@ signal died
 
 @onready var CS2DAttack = $Area2D/CollisionShape2D
 
+var is_blinking = false
+var blink_duration = 1
+
 func _ready():
 	var HealthBars = get_tree().get_nodes_in_group("HealthBar")
 	if HealthBars.size() > 0:
@@ -24,11 +27,21 @@ func _ready():
 
 
 func GetDamage(damage):
+	#Shader blink
+	is_blinking = true
+	var material = animated_sprite.material as ShaderMaterial
+	material.set("shader_parameter/blink", 1.0)
+	await get_tree().create_timer(blink_duration).timeout
+	material.set("shader_parameter/blink", 0.0)
+	is_blinking = false
+	
 	HealthBar.update_health_bar(damage)
 	life -= damage
+	
 	if(life <= 0):
 		emit_signal("died")
 		print("Character is dead")
+
 
 func _physics_process(delta):
 	if !pause_or_end:
@@ -38,13 +51,23 @@ func _physics_process(delta):
 		attack()
 
 
+func _process(delta: float) -> void:
+	ShaderUpdate(delta)
+
+
+func ShaderUpdate(delta):
+	if is_blinking:
+		var material = animated_sprite.material as ShaderMaterial
+		material.set("shader_parameter/blink", 1.0)
+		material.set("shader_parameter/blink_time", material.get("shader_parameter/blink_time") + delta)
+	else:
+		var material = animated_sprite.material as ShaderMaterial
+		material.set("shader_parameter/blink_time", 0.0)
+
+
 func attack():
 	if (Input.is_action_pressed("attack") && !isAttacking):
 		isAttacking = true
-		for body in enemies_in_area:
-			if body.has_method("GetDamage"):
-				body.GetDamage(m_damage)
-				
 		#Ataque arriva
 		if (direccion == "up"):
 			var random_number = randi() % 2 + 1
@@ -118,6 +141,9 @@ func _on_animated_sprite_2d_animation_finished() -> void:
 	|| animated_sprite.animation == "attack_down_02"
 	|| animated_sprite.animation == "attack_up_01"
 	|| animated_sprite.animation == "attack_up_02"):
+		for body in enemies_in_area:
+			if body.has_method("GetDamage"):
+				body.GetDamage(m_damage)
 		isAttacking = false
 		animated_sprite.play("idle")	
 

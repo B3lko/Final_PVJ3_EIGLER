@@ -1,7 +1,13 @@
-[gd_scene load_steps=54 format=3 uid="uid://df57ph0k7sgcc"]
+[gd_scene load_steps=56 format=3 uid="uid://df57ph0k7sgcc"]
 
 [ext_resource type="Texture2D" uid="uid://fsiltwn15yir" path="res://Assets/Sprites/Warrior_Blue.png" id="1_lerel"]
+[ext_resource type="Shader" path="res://Scenes/player.gdshader" id="1_nn5jc"]
 [ext_resource type="Script" path="res://Scenes/player.gd" id="1_yfkwf"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_xva8s"]
+shader = ExtResource("1_nn5jc")
+shader_parameter/blink = null
+shader_parameter/blink_time = 0.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_117tt"]
 atlas = ExtResource("1_lerel")
@@ -392,6 +398,7 @@ size = Vector2(50, 100)
 script = ExtResource("1_yfkwf")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." groups=["Player"]]
+material = SubResource("ShaderMaterial_xva8s")
 sprite_frames = SubResource("SpriteFrames_mmpbr")
 animation = &"walk"
 autoplay = "idle"

@@ -8,6 +8,8 @@ var damage = 10
 var pause_or_end = false
 var life = 100
 
+var is_flashing = false
+var flash_duration = 0.2
 
 func _ready():
 	var players = get_tree().get_nodes_in_group("Player")
@@ -22,6 +24,13 @@ func _process(delta: float) -> void:
 
 
 func GetDamage(gdamage):
+	if not is_flashing:
+		is_flashing = true
+		var material = animated_sprite.material as ShaderMaterial
+		material.set("shader_parameter/damage_flash", 1.0)
+		await get_tree().create_timer(flash_duration).timeout
+		material.set("shader_parameter/damage_flash", 0.0)
+		is_flashing = false
 	life -= gdamage
 	print("Goblin life: " , life)
 	if(life <= 0):
