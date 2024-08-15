@@ -20,7 +20,7 @@ func _ready() -> void:
 	label.text = str(time_left)
 	create_timer()
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("pause"):
 		if (level_finished):
 			level_finished = false;

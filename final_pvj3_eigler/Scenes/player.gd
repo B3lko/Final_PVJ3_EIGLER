@@ -93,7 +93,7 @@ func attack():
 				animated_sprite.play("attack_02")
 
 
-func move_character(delta):
+func move_character(_delta):
 	var input_direction = Input.get_vector("move_left", "move_right", "move_up", "move_bottom")
 	velocity = input_direction * SPEED
 	move_and_slide()

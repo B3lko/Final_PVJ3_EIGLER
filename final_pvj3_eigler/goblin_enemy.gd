@@ -11,16 +11,38 @@ var life = 100
 var is_flashing = false
 var flash_duration = 0.2
 
+@onready var nav: NavigationAgent2D = $NavigationAgent2D
+var moving = true
+var SPEED = 10000
+
+
 func _ready():
 	var players = get_tree().get_nodes_in_group("Player")
 	if players.size() > 0:
 		player = players[0]
 
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if !pause_or_end:
 		if(canAttack && !isAttacking):
 			Attack()
+		else:
+			move(_delta)
+
+
+func move(delta):
+	if moving:
+		var direction = Vector3()
+		nav.target_position = player.position
+		direction = nav.get_next_path_position() - global_position
+		direction = direction.normalized()
+		
+		velocity = velocity.lerp(direction * SPEED * delta, 1 * delta)
+		move_and_slide()
+		if global_position.distance_to(player.position) < 10:
+			moving = false
+			velocity = Vector2.ZERO
+			print("Stopped")
 
 
 func GetDamage(gdamage):
