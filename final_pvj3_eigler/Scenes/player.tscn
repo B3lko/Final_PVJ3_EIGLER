@@ -1,8 +1,8 @@
 [gd_scene load_steps=56 format=3 uid="uid://df57ph0k7sgcc"]
 
-[ext_resource type="Texture2D" uid="uid://fsiltwn15yir" path="res://Assets/Sprites/Warrior_Blue.png" id="1_lerel"]
-[ext_resource type="Shader" path="res://Scenes/player.gdshader" id="1_nn5jc"]
-[ext_resource type="Script" path="res://Scenes/player.gd" id="1_yfkwf"]
+[ext_resource type="Texture2D" uid="uid://fsiltwn15yir" path="res://Assets/Sprites/Characters/Warrior_Blue.png" id="1_lerel"]
+[ext_resource type="Shader" path="res://Shaders/player.gdshader" id="1_nn5jc"]
+[ext_resource type="Script" path="res://Scripts/player.gd" id="1_yfkwf"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_xva8s"]
 shader = ExtResource("1_nn5jc")

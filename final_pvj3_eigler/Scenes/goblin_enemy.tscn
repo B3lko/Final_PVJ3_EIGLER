@@ -1,8 +1,12 @@
-[gd_scene load_steps=33 format=3 uid="uid://dgs42yeyik5kh"]
+[gd_scene load_steps=34 format=3 uid="uid://dgs42yeyik5kh"]
 
-[ext_resource type="Shader" path="res://Scenes/goblin_enemy.gdshader" id="1_5bf3r"]
-[ext_resource type="Script" path="res://goblin_enemy.gd" id="1_8wp1u"]
-[ext_resource type="Texture2D" uid="uid://ou2fe8bdki2" path="res://Assets/Sprites/Torch_Red.png" id="2_ogw5d"]
+[ext_resource type="Shader" path="res://Shaders/goblin_enemy.gdshader" id="1_5bf3r"]
+[ext_resource type="Script" path="res://Scripts/goblin_enemy.gd" id="1_8wp1u"]
+[ext_resource type="Texture2D" uid="uid://ou2fe8bdki2" path="res://Assets/Sprites/Characters/Torch_Red.png" id="2_ogw5d"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_a4yx3"]
+shader = ExtResource("1_5bf3r")
+shader_parameter/damage_flash = null
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ayx31"]
 shader = ExtResource("1_5bf3r")
@@ -211,7 +215,9 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_x5fq3"]
 
 [node name="Goblin_Enemy" type="CharacterBody2D" groups=["enemies"]]
+z_index = 6
 script = ExtResource("1_8wp1u")
+shader_material_resource = SubResource("ShaderMaterial_a4yx3")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 material = SubResource("ShaderMaterial_ayx31")

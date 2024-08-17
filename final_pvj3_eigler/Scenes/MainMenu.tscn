@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://c2hdyraworarf"]
 
-[ext_resource type="Script" path="res://MainMenu.gd" id="1_3gj3l"]
-[ext_resource type="Theme" uid="uid://c0bljv12kjjb" path="res://Scenes/MainMenu.tres" id="2_71g7s"]
+[ext_resource type="Script" path="res://Scripts/MainMenu.gd" id="1_3gj3l"]
+[ext_resource type="Theme" uid="uid://c0bljv12kjjb" path="res://Themes/MainMenu.tres" id="2_71g7s"]
 [ext_resource type="FontFile" uid="uid://c4ubi6ftcm5ix" path="res://Assets/Fonts/The Wild Breath of Zelda.otf" id="3_wjhl6"]
 
 [sub_resource type="ImageTexture" id="ImageTexture_mqxh5"]
