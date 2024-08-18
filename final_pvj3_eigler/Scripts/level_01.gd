@@ -19,8 +19,15 @@ func _ready() -> void:
 	player.connect("died", Callable(self, "_on_player_died"))
 	label.text = str(time_left)
 	create_timer()
+	
+func update_z_index_by_group(group_name: String):
+	for character in get_tree().get_nodes_in_group(group_name):
+		character.z_index = max(5, int(character.position.y))
 
 func _process(_delta: float) -> void:
+	update_z_index_by_group("enemies_sprite")
+	update_z_index_by_group("Player")
+	
 	if Input.is_action_just_pressed("pause"):
 		if (level_finished):
 			level_finished = false;

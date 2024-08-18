@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://dgs42yeyik5kh"]
+[gd_scene load_steps=40 format=3 uid="uid://dgs42yeyik5kh"]
 
 [ext_resource type="Shader" path="res://Shaders/goblin_enemy.gdshader" id="1_5bf3r"]
 [ext_resource type="Script" path="res://Scripts/goblin_enemy.gd" id="1_8wp1u"]
@@ -112,6 +112,30 @@ region = Rect2(768, 768, 192, 192)
 atlas = ExtResource("2_ogw5d")
 region = Rect2(960, 768, 192, 192)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_4x7ek"]
+atlas = ExtResource("2_ogw5d")
+region = Rect2(0, 192, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_imydm"]
+atlas = ExtResource("2_ogw5d")
+region = Rect2(192, 192, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n45wv"]
+atlas = ExtResource("2_ogw5d")
+region = Rect2(384, 192, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ci2pa"]
+atlas = ExtResource("2_ogw5d")
+region = Rect2(576, 192, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lhg8y"]
+atlas = ExtResource("2_ogw5d")
+region = Rect2(768, 192, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2yh7a"]
+atlas = ExtResource("2_ogw5d")
+region = Rect2(960, 192, 192, 192)
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_6uis5"]
 animations = [{
 "frames": [{
@@ -208,13 +232,37 @@ animations = [{
 "loop": false,
 "name": &"Up_Attack",
 "speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4x7ek")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_imydm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n45wv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ci2pa")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lhg8y")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2yh7a")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 10.0
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ocuaj"]
+size = Vector2(50, 47)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_x5fq3"]
 
-[node name="Goblin_Enemy" type="CharacterBody2D" groups=["enemies"]]
+[node name="Goblin_Enemy" type="CharacterBody2D" groups=["enemies", "enemies_sprite"]]
 z_index = 6
 script = ExtResource("1_8wp1u")
 shader_material_resource = SubResource("ShaderMaterial_a4yx3")
@@ -222,17 +270,18 @@ shader_material_resource = SubResource("ShaderMaterial_a4yx3")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 material = SubResource("ShaderMaterial_ayx31")
 sprite_frames = SubResource("SpriteFrames_6uis5")
-animation = &"Up_Attack"
+animation = &"walk"
 autoplay = "Idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(4, 3.5)
 shape = SubResource("RectangleShape2D_ocuaj")
 
 [node name="Area2D" type="Area2D" parent="."]
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="Area2D"]
 z_index = 3
-scale = Vector2(7.5, 7.5)
+scale = Vector2(6, 6)
 shape = SubResource("CircleShape2D_x5fq3")
 one_way_collision_margin = 0.0
 

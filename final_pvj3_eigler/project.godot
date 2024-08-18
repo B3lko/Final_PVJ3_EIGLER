@@ -23,6 +23,7 @@ window/size/viewport_height=900
 
 Player=""
 HealthBar=""
+enemies_sprite=""
 
 [input]
 

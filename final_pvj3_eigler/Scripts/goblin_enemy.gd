@@ -13,12 +13,15 @@ var is_flashing = false
 
 @onready var nav: NavigationAgent2D = $NavigationAgent2D
 var moving = true
-@export var SPEED = 10000
+@export var SPEED = 5000
 
 @export var shader_material_resource : ShaderMaterial
 var unique_material : ShaderMaterial
 
+signal died
+
 func _ready():
+	animated_sprite.play("walk")	
 	unique_material = shader_material_resource.duplicate() as ShaderMaterial
 	animated_sprite.material = unique_material
 	var players = get_tree().get_nodes_in_group("Player")
@@ -31,7 +34,7 @@ func _process(_delta: float) -> void:
 		if(canAttack && !isAttacking):
 			Attack()
 		else:
-			pass#move(_delta)
+			move(_delta)
 
 
 func move(delta):
@@ -42,6 +45,10 @@ func move(delta):
 		direction = direction.normalized()
 		
 		velocity = velocity.lerp(direction * SPEED * delta, 1 * delta)
+		if (velocity.x < 0):
+			animated_sprite.scale.x = -1;
+		if (velocity.x > 0):
+			animated_sprite.scale.x = 1;			
 		move_and_slide()
 		if global_position.distance_to(player.position) < 10:
 			moving = false
@@ -57,6 +64,7 @@ func GetDamage(gdamage):
 		is_flashing = false
 	life -= gdamage
 	if(life <= 0):
+		emit_signal("died")
 		queue_free()
 
 
@@ -93,7 +101,8 @@ func _on_animated_sprite_2d_animation_finished() -> void:
 	animated_sprite.animation == "Down_Attack"):
 		if (canAttack):
 			player.GetDamage(damage)
-		animated_sprite.play("Idle")
+		#animated_sprite.play("Idle")
+		animated_sprite.play("walk")
 		isAttacking = false
 
 

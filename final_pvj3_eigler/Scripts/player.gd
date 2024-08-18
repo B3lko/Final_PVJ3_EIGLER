@@ -18,6 +18,9 @@ signal died
 var is_blinking = false
 @export var blink_duration = 1
 
+var force: Vector2
+@export var force_value = 250
+
 func _ready():
 	var HealthBars = get_tree().get_nodes_in_group("HealthBar")
 	if HealthBars.size() > 0:
@@ -101,20 +104,24 @@ func move_character(_delta):
 func getDirection(input_direction):
 	if abs(input_direction.x) > abs(input_direction.y):
 		if input_direction.x > 0:
-			CS2DAttack.shape.extents = Vector2(75, 30)
+			force = Vector2(force_value, 0)						
+			CS2DAttack.shape.extents = Vector2(60, 30)
 			CS2DAttack.position = Vector2(35, 0)
 			direction = "right"
 		elif input_direction.x < 0:
-			CS2DAttack.shape.extents = Vector2(75, 30)
+			force = Vector2(-force_value, 0)			
+			CS2DAttack.shape.extents = Vector2(60, 30)
 			CS2DAttack.position = Vector2(-35, 0)
 			direction = "left"
 	else:
 		if input_direction.y < 0:
-			CS2DAttack.shape.extents = Vector2(30, 75)
+			force = Vector2(0, -force_value)			
+			CS2DAttack.shape.extents = Vector2(30, 60)
 			CS2DAttack.position = Vector2(0, -35)
 			direction = "up"
 		elif input_direction.y > 0:
-			CS2DAttack.shape.extents = Vector2(30, 75)
+			force = Vector2(0, force_value)			
+			CS2DAttack.shape.extents = Vector2(30, 60)
 			CS2DAttack.position = Vector2(0, 35)
 			direction = "down"
 
@@ -142,6 +149,7 @@ func _on_animated_sprite_2d_animation_finished() -> void:
 		for body in enemies_in_area:
 			if body.has_method("GetDamage"):
 				body.GetDamage(m_damage)
+				body.velocity += force				
 		isAttacking = false
 		animated_sprite.play("idle")	
 
