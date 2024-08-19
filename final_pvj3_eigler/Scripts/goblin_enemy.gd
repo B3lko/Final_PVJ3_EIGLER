@@ -18,6 +18,9 @@ var moving = true
 @export var shader_material_resource : ShaderMaterial
 var unique_material : ShaderMaterial
 
+@onready var Steak = load("res://Scenes/steak.tscn")
+@export var probability = 30
+
 signal died
 
 func _ready():
@@ -65,8 +68,12 @@ func GetDamage(gdamage):
 	life -= gdamage
 	if(life <= 0):
 		emit_signal("died")
+		var steak_instance = Steak.instantiate()
+		steak_instance.position = position
+		var chance = randi() % 100 + 0
+		if (chance < probability):
+			get_parent().get_parent().get_node("TileMap").add_child(steak_instance)
 		queue_free()
-
 
 func Attack():
 	isAttacking = true

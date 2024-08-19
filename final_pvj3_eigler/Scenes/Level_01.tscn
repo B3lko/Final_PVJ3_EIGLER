@@ -365,7 +365,7 @@ outlines = Array[PackedVector2Array]([PackedVector2Array(-368, 431, -110, 431, -
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource("1_hq6sg")
-time_left = 100
+time_left = 60
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = SubResource("TileSet_87qnk")

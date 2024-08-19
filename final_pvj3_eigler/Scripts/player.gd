@@ -21,6 +21,9 @@ var is_blinking = false
 var force: Vector2
 @export var force_value = 250
 
+var is_flashing = false
+@export var flash_duration = 0.2
+
 func _ready():
 	var HealthBars = get_tree().get_nodes_in_group("HealthBar")
 	if HealthBars.size() > 0:
@@ -38,11 +41,25 @@ func GetDamage(damage):
 	material.set("shader_parameter/blink", 0.0)
 	is_blinking = false
 	
-	HealthBar.update_health_bar(damage)
 	life -= damage
+	HealthBar.update_health_bar(life)
 	
 	if(life <= 0):
 		emit_signal("died")
+
+
+func GetLife(_life):
+	if not is_flashing:
+		is_flashing = true
+		var material = animated_sprite.material as ShaderMaterial
+		material.set("shader_parameter/damage_flash", 1.0)
+		await get_tree().create_timer(flash_duration).timeout
+		material.set("shader_parameter/damage_flash", 0.0)
+		is_flashing = false
+	life += _life
+	if (life > 100):
+		life = 100
+	HealthBar.update_health_bar(life)
 
 
 func _physics_process(delta):
@@ -167,3 +184,8 @@ func _on_area_2d_body_exited(body: Node2D) -> void:
 	if enemies_in_area.has(body):
 		enemies_in_area.erase(body)
 
+
+func _on_area_2d_get_items_area_entered(area: Area2D) -> void:
+	if (area.is_in_group("steak")):
+		GetLife(area.get_parent().life)
+		area.get_parent().queue_free()

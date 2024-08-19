@@ -1,0 +1,95 @@
+[gd_scene load_steps=14 format=3 uid="uid://b6ajx5a7r7xu1"]
+
+[ext_resource type="Script" path="res://Scripts/steak.gd" id="1_7yjpd"]
+[ext_resource type="Texture2D" uid="uid://bv72iv25lpw2l" path="res://Assets/Sprites/Resources/M_Spawn.png" id="1_84rry"]
+[ext_resource type="Texture2D" uid="uid://s2c76mj5ytmd" path="res://Assets/Sprites/Resources/M_Idle.png" id="3_n00v3"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d3fn7"]
+atlas = ExtResource("1_84rry")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ymdx6"]
+atlas = ExtResource("1_84rry")
+region = Rect2(128, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3ufmo"]
+atlas = ExtResource("1_84rry")
+region = Rect2(256, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ijjyv"]
+atlas = ExtResource("1_84rry")
+region = Rect2(384, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h0u4u"]
+atlas = ExtResource("1_84rry")
+region = Rect2(512, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vlryo"]
+atlas = ExtResource("1_84rry")
+region = Rect2(640, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xiu6h"]
+atlas = ExtResource("1_84rry")
+region = Rect2(768, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_syjti"]
+atlas = ExtResource("3_n00v3")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_cvc3o"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d3fn7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ymdx6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3ufmo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ijjyv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h0u4u")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vlryo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xiu6h")
+}],
+"loop": false,
+"name": &"Spawn",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_syjti")
+}],
+"loop": true,
+"name": &"Spawned",
+"speed": 1.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_q6nqp"]
+size = Vector2(43, 29)
+
+[node name="Steak" type="Node2D" groups=["steak"]]
+z_index = 5
+script = ExtResource("1_7yjpd")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+z_index = 5
+sprite_frames = SubResource("SpriteFrames_cvc3o")
+animation = &"Spawn"
+autoplay = "Spawn"
+
+[node name="Area2D" type="Area2D" parent="." groups=["steak"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(3.5, 11.5)
+shape = SubResource("RectangleShape2D_q6nqp")
+
+[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]

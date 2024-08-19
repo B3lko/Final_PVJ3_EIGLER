@@ -9,6 +9,6 @@ func _ready() -> void:
 
 
 func update_health_bar(value: float):
-	current_health -= value
+	current_health = value
 	current_health = clamp(current_health, 0, max_health)
 	self.value = current_health
