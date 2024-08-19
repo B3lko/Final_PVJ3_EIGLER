@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cbl4pusv21kin"
-path="res://.godot/imported/Tree.png-afca428c94e8236da008ada4b653da9f.ctex"
+uid="uid://byaj2x28ltycy"
+path="res://.godot/imported/HappySheep_All.png-201f1c3663361f709f0fbb77f6161944.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Sprites/Tiles/Trees/Tree.png"
-dest_files=["res://.godot/imported/Tree.png-afca428c94e8236da008ada4b653da9f.ctex"]
+source_file="res://Assets/Sprites/Tiles/HappySheep_All.png"
+dest_files=["res://.godot/imported/HappySheep_All.png-201f1c3663361f709f0fbb77f6161944.ctex"]
 
 [params]
 

@@ -109,3 +109,6 @@ func _on_animated_sprite_2d_animation_finished() -> void:
 func SET_pause_or_end(state):
 	pause_or_end = state
 
+func SET_end(state):
+	pause_or_end = state
+	animated_sprite.visible = false

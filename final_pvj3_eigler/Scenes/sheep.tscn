@@ -1,0 +1,123 @@
+[gd_scene load_steps=18 format=3 uid="uid://b2mcflww3aa40"]
+
+[ext_resource type="Texture2D" uid="uid://byaj2x28ltycy" path="res://Assets/Sprites/Tiles/HappySheep_All.png" id="1_w0dke"]
+[ext_resource type="Script" path="res://Scripts/sheep.gd" id="2_dlkj8"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fb5ga"]
+atlas = ExtResource("1_w0dke")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xhxve"]
+atlas = ExtResource("1_w0dke")
+region = Rect2(128, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rlopu"]
+atlas = ExtResource("1_w0dke")
+region = Rect2(256, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2yvg8"]
+atlas = ExtResource("1_w0dke")
+region = Rect2(384, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_esi5f"]
+atlas = ExtResource("1_w0dke")
+region = Rect2(512, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_75qgp"]
+atlas = ExtResource("1_w0dke")
+region = Rect2(640, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e3354"]
+atlas = ExtResource("1_w0dke")
+region = Rect2(768, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_eitwk"]
+atlas = ExtResource("1_w0dke")
+region = Rect2(896, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jlyv0"]
+atlas = ExtResource("1_w0dke")
+region = Rect2(0, 128, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c3j4n"]
+atlas = ExtResource("1_w0dke")
+region = Rect2(128, 128, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hxub6"]
+atlas = ExtResource("1_w0dke")
+region = Rect2(256, 128, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t8ofa"]
+atlas = ExtResource("1_w0dke")
+region = Rect2(384, 128, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n2jcr"]
+atlas = ExtResource("1_w0dke")
+region = Rect2(512, 128, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s1wla"]
+atlas = ExtResource("1_w0dke")
+region = Rect2(640, 128, 128, 128)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_u23q3"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fb5ga")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xhxve")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rlopu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2yvg8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_esi5f")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_75qgp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e3354")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_eitwk")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jlyv0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c3j4n")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hxub6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t8ofa")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n2jcr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s1wla")
+}],
+"loop": true,
+"name": &"Jump",
+"speed": 12.0
+}]
+
+[node name="Sheep" type="AnimatedSprite2D" groups=["Sheep"]]
+z_index = 5
+sprite_frames = SubResource("SpriteFrames_u23q3")
+animation = &"Idle"
+autoplay = "Idle"
+frame_progress = 0.645168
+script = ExtResource("2_dlkj8")

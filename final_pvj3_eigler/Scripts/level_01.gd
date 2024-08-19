@@ -9,20 +9,25 @@ var scene_Level_01 = load("res://Scenes/Level_01.tscn")
 @onready var label = $CanvasLayer/Label
 @onready var player = $Player
 
-@export var time_left: int = 1000
+@export var time_left: int
 var level_finished = false
 var paused_timer_time: float = 0.0
 
 var active_timer: SceneTreeTimer = null
 
+@onready var spawner = $Enemy_Spawner
+
+
 func _ready() -> void:
 	player.connect("died", Callable(self, "_on_player_died"))
 	label.text = str(time_left)
 	create_timer()
-	
+
+
 func update_z_index_by_group(group_name: String):
 	for character in get_tree().get_nodes_in_group(group_name):
 		character.z_index = max(5, int(character.position.y))
+
 
 func _process(_delta: float) -> void:
 	update_z_index_by_group("enemies_sprite")
@@ -33,6 +38,7 @@ func _process(_delta: float) -> void:
 			level_finished = false;
 			color.visible = false
 			TRectPause.visible = false
+			spawner.resume_spawn_timers()
 			get_tree().call_group_flags(SceneTree.GROUP_CALL_DEFAULT, "enemies", "SET_pause_or_end", false)
 			player.SET_pause_or_end(false)
 			if paused_timer_time > 0:
@@ -42,6 +48,7 @@ func _process(_delta: float) -> void:
 			level_finished = true
 			color.visible = true
 			TRectPause.visible = true
+			spawner.pause_spawn_timers()
 			get_tree().call_group_flags(SceneTree.GROUP_CALL_DEFAULT, "enemies", "SET_pause_or_end", true)
 			player.SET_pause_or_end(true)
 			if active_timer:
@@ -52,6 +59,7 @@ func _process(_delta: float) -> void:
 func create_timer() -> void:
 	active_timer = get_tree().create_timer(1.0)
 	active_timer.connect("timeout", Callable(self, "_on_Timer_timeout"))
+
 
 func _on_Timer_timeout() -> void:
 	if !level_finished:
@@ -70,7 +78,10 @@ func _on_player_died() -> void:
 
 
 func SetWinLevel():
-	get_tree().call_group_flags(SceneTree.GROUP_CALL_DEFAULT, "enemies", "SET_pause_or_end", true)
+	for node in get_tree().get_nodes_in_group("Sheep"):
+		if node.has_method("_on_player_win"):
+			node._on_player_win()
+	get_tree().call_group_flags(SceneTree.GROUP_CALL_DEFAULT, "enemies", "SET_end", true)
 	player.SET_pause_or_end(true)
 	level_finished = true
 	color.visible = true
@@ -78,7 +89,7 @@ func SetWinLevel():
 
 
 func SetLoseLevel():
-	get_tree().call_group_flags(SceneTree.GROUP_CALL_DEFAULT, "enemies", "SET_pause_or_end", true)
+	get_tree().call_group_flags(SceneTree.GROUP_CALL_DEFAULT, "enemies", "SET_end", true)
 	player.SET_pause_or_end(true)
 	level_finished = true
 	color.visible = true

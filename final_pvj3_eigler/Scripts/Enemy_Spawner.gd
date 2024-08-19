@@ -9,6 +9,7 @@ var spawned = 0
 
 var ready_start = false
 
+var timers = []
 
 func _ready() -> void:
 	for i in range(living_enemies):
@@ -16,6 +17,7 @@ func _ready() -> void:
 		timer.wait_time = (i + 2)
 		timer.one_shot = true
 		add_child(timer)
+		timers.append({ "timer": timer, "remaining_time": timer.wait_time })
 		timer.start()
 		timer.connect("timeout", Callable(self, "First_Spawn").bind(i+1))
 
@@ -23,30 +25,59 @@ func _ready() -> void:
 func _process(_delta: float) -> void:
 	if(canSpawn() && ready_start):
 		spawn()
-	
+
 
 func canSpawn():
 	if (spawned < living_enemies):
 		return true
 
 
+func pause_spawn_timers() -> void:
+	for timer_data in timers:
+		var timer = timer_data["timer"]
+		if not timer.is_stopped():
+			timer_data["remaining_time"] = timer.time_left
+			timer.stop()
+
+
+func resume_spawn_timers() -> void:
+	for timer_data in timers:
+		var timer = timer_data["timer"]
+		if timer_data["remaining_time"] > 0:
+			timer.wait_time = timer_data["remaining_time"]
+			timer_data["remaining_time"] = 0
+			timer.start()
+
+
+
 func First_Spawn(value):
+	_clean_up_timers()
 	if value == living_enemies:
 		ready_start = true;
 	spawn()
 
 
-func _on_Enemy_died():
+func _on_Enemy_died() -> void:
 	var timer = Timer.new()
 	timer.wait_time = wait_spawn
 	timer.one_shot = true
 	add_child(timer)
+	timers.append({ "timer": timer, "remaining_time": timer.wait_time })  # Guardar timer y su tiempo restante
 	timer.start()
 	timer.connect("timeout", Callable(self, "SetSpawned"))
 
 
 func SetSpawned():
 	spawned -= 1
+	_clean_up_timers()
+
+
+func _clean_up_timers() -> void:
+	var active_timers = []
+	for timer_data in timers:
+		if timer_data["timer"].time_left > 0:
+			active_timers.append(timer_data)
+	timers = active_timers
 
 
 func spawn():
