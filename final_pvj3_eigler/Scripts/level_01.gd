@@ -11,12 +11,15 @@ var scene_Level_01 = load("res://Scenes/Level_01.tscn")
 
 @export var time_left: int
 var level_finished = false
+var is_pause = false
 var paused_timer_time: float = 0.0
 
 var active_timer: SceneTreeTimer = null
 
 @onready var spawner = $Enemy_Spawner
 
+@onready var pause_on = $Pause_On
+@onready var pause_off = $Pause_Off
 
 func _ready() -> void:
 	player.connect("died", Callable(self, "_on_player_died"))
@@ -32,10 +35,15 @@ func update_z_index_by_group(group_name: String):
 func _process(_delta: float) -> void:
 	update_z_index_by_group("enemies_sprite")
 	update_z_index_by_group("Player")
-	
+	if(!level_finished):
+		pause_controller()
+
+
+func pause_controller():
 	if Input.is_action_just_pressed("pause"):
-		if (level_finished):
-			level_finished = false;
+		if (is_pause):
+			is_pause = false
+			pause_off.play()
 			color.visible = false
 			TRectPause.visible = false
 			spawner.resume_spawn_timers()
@@ -45,7 +53,8 @@ func _process(_delta: float) -> void:
 				active_timer = get_tree().create_timer(paused_timer_time)
 				active_timer.connect("timeout", Callable(self, "_on_Timer_timeout"))
 		else:
-			level_finished = true
+			is_pause = true
+			pause_on.play()
 			color.visible = true
 			TRectPause.visible = true
 			spawner.pause_spawn_timers()
@@ -62,7 +71,7 @@ func create_timer() -> void:
 
 
 func _on_Timer_timeout() -> void:
-	if !level_finished:
+	if !level_finished && !is_pause:
 		if time_left > 0:
 			time_left -= 1
 			label.text = str(time_left)
@@ -102,3 +111,4 @@ func _on_button_restart_pressed() -> void:
 
 func _on_button_menu_pressed() -> void:
 	get_tree().change_scene_to_packed(scene_Main_Menu)
+

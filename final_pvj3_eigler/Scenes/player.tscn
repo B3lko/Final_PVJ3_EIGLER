@@ -1,8 +1,14 @@
-[gd_scene load_steps=57 format=3 uid="uid://df57ph0k7sgcc"]
+[gd_scene load_steps=63 format=3 uid="uid://df57ph0k7sgcc"]
 
 [ext_resource type="Texture2D" uid="uid://fsiltwn15yir" path="res://Assets/Sprites/Characters/Warrior_Blue.png" id="1_lerel"]
 [ext_resource type="Shader" path="res://Shaders/player.gdshader" id="1_nn5jc"]
 [ext_resource type="Script" path="res://Scripts/player.gd" id="1_yfkwf"]
+[ext_resource type="AudioStream" uid="uid://bhbwd38m54b6a" path="res://Assets/Audio/SFX/zapsplat_warfare_sword_swing_fast_whoosh_blade_ring_001_43810.mp3" id="5_sjrvo"]
+[ext_resource type="AudioStream" uid="uid://doyfrr428y0u2" path="res://Assets/Audio/SFX/zapsplat_warfare_sword_swing_fast_whoosh_blade_ring_002_43811.mp3" id="6_h7fmt"]
+[ext_resource type="AudioStream" uid="uid://bvj1awwmkao0" path="res://Assets/Audio/SFX/Player/Grass Running.wav" id="7_yynsc"]
+[ext_resource type="AudioStream" uid="uid://c8aj3j7ywpqsp" path="res://Assets/Audio/SFX/Player/damage_1_sean.wav" id="8_256qj"]
+[ext_resource type="AudioStream" uid="uid://41io4so7ticb" path="res://Assets/Audio/SFX/Player/damage_2_sean.wav" id="9_xa4t7"]
+[ext_resource type="AudioStream" uid="uid://dboh2be5na4ca" path="res://Assets/Audio/SFX/Player/damage_6_sean.wav" id="10_efwh0"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_2wh5h"]
 shader = ExtResource("1_nn5jc")
@@ -424,6 +430,30 @@ debug_color = Color(0.847059, 0, 0.941176, 0.678431)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D_GetItems"]
 shape = SubResource("CircleShape2D_wwfbc")
+
+[node name="Sword_1" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_sjrvo")
+volume_db = -5.0
+
+[node name="Sword_2" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_h7fmt")
+volume_db = -5.0
+
+[node name="GrassWalk" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_yynsc")
+volume_db = -10.0
+
+[node name="Scream1" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_256qj")
+volume_db = -10.0
+
+[node name="Scream2" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("9_xa4t7")
+volume_db = -10.0
+
+[node name="Scream3" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("10_efwh0")
+volume_db = -10.0
 
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

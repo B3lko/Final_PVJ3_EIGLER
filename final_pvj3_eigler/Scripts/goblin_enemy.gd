@@ -22,6 +22,8 @@ var unique_material : ShaderMaterial
 @export var probability = 30
 
 signal died
+@onready var Attack_1 = $Attack_1
+@onready var Attack_2 = $Attack_2
 
 func _ready():
 	animated_sprite.play("walk")	
@@ -77,6 +79,11 @@ func GetDamage(gdamage):
 
 func Attack():
 	isAttacking = true
+	var random_number = randi() % 2 + 1
+	if(random_number == 1):
+		Attack_1.play()
+	else:
+		Attack_2.play()
 	var direction = player.global_position - global_position
 	if abs(direction.x) > abs(direction.y):
 		if direction.x > 0:

@@ -1,8 +1,10 @@
-[gd_scene load_steps=40 format=3 uid="uid://dgs42yeyik5kh"]
+[gd_scene load_steps=42 format=3 uid="uid://dgs42yeyik5kh"]
 
 [ext_resource type="Shader" path="res://Shaders/goblin_enemy.gdshader" id="1_5bf3r"]
 [ext_resource type="Script" path="res://Scripts/goblin_enemy.gd" id="1_8wp1u"]
 [ext_resource type="Texture2D" uid="uid://ou2fe8bdki2" path="res://Assets/Sprites/Characters/Torch_Red.png" id="2_ogw5d"]
+[ext_resource type="AudioStream" uid="uid://c0w4jebybpevk" path="res://Assets/Audio/SFX/warfare_medieval_katana_sword_swing_002.mp3" id="4_fhupf"]
+[ext_resource type="AudioStream" uid="uid://bd0dgxhcheg61" path="res://Assets/Audio/SFX/warfare_medieval_katana_sword_swing_001.mp3" id="4_flq58"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_a4yx3"]
 shader = ExtResource("1_5bf3r")
@@ -286,6 +288,14 @@ shape = SubResource("CircleShape2D_x5fq3")
 one_way_collision_margin = 0.0
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+
+[node name="Attack_1" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_flq58")
+volume_db = 10.0
+
+[node name="Attack_2" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_fhupf")
+volume_db = 10.0
 
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

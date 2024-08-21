@@ -24,6 +24,13 @@ var force: Vector2
 var is_flashing = false
 @export var flash_duration = 0.2
 
+@onready var Sword_1 = $Sword_1
+@onready var Sword_2 = $Sword_2
+@onready var Walk_Grass = $GrassWalk
+@onready var Scream1 = $Scream1
+@onready var Scream2 = $Scream2
+@onready var Scream3 = $Scream3
+
 func _ready():
 	var HealthBars = get_tree().get_nodes_in_group("HealthBar")
 	if HealthBars.size() > 0:
@@ -33,6 +40,14 @@ func _ready():
 
 
 func GetDamage(damage):
+	if(!Scream1.is_playing() && !Scream2.is_playing() && !Scream3.is_playing()):
+			var random_number = randi() % 3 + 1
+			if(random_number == 1):
+				Scream1.play()
+			elif(random_number == 2):
+				Scream2.play()
+			else:
+				Scream3.play()
 	#Shader blink
 	is_blinking = true
 	var material = animated_sprite.material as ShaderMaterial
@@ -43,6 +58,8 @@ func GetDamage(damage):
 	
 	life -= damage
 	HealthBar.update_health_bar(life)
+	
+
 	
 	if(life <= 0):
 		emit_signal("died")
@@ -87,9 +104,13 @@ func ShaderUpdate(delta):
 func attack():
 	if (Input.is_action_pressed("attack") && !isAttacking):
 		isAttacking = true
+		var random_number = randi() % 2 + 1
+		if(random_number == 1):
+			Sword_2.play()
+		else:
+			Sword_1.play()
 		#Ataque arriva
 		if (direction == "up"):
-			var random_number = randi() % 2 + 1
 			if(random_number == 1):
 				animated_sprite.play("attack_up_01")
 			else:
@@ -97,7 +118,6 @@ func attack():
 		
 		#Ataque abajo
 		if (direction == "down"):
-			var random_number = randi() % 2 + 1
 			if(random_number == 1):
 				animated_sprite.play("attack_down_01")
 			else:
@@ -105,7 +125,6 @@ func attack():
 				
 		#Ataque de izquierda y/o derecha
 		if (direction == "left" || direction == "right"):
-			var random_number = randi() % 2 + 1
 			if(random_number == 1):
 				animated_sprite.play("attack_01")
 			else:
@@ -119,6 +138,9 @@ func move_character(_delta):
 	getDirection(input_direction)
 	
 func getDirection(input_direction):
+	if (input_direction.x != 0 || input_direction.y != 0):
+		if(!Walk_Grass.is_playing()):
+			Walk_Grass.play()
 	if abs(input_direction.x) > abs(input_direction.y):
 		if input_direction.x > 0:
 			force = Vector2(force_value, 0)						
@@ -165,6 +187,7 @@ func _on_animated_sprite_2d_animation_finished() -> void:
 	|| animated_sprite.animation == "attack_up_02"):
 		for body in enemies_in_area:
 			if body.has_method("GetDamage"):
+				#Sword_1.play()
 				body.GetDamage(m_damage)
 				body.velocity += force				
 		isAttacking = false
