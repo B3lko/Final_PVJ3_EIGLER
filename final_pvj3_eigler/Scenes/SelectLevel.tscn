@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://24410s0p8bku"]
 
 [ext_resource type="Script" path="res://Scripts/SelectLevel.gd" id="1_a1ly7"]
-[ext_resource type="Theme" uid="uid://c0bljv12kjjb" path="res://Themes/MainMenu.tres" id="2_eaa22"]
+[ext_resource type="Theme" uid="uid://c0bljv12kjjb" path="res://Themes/UI_Main_Theme.tres" id="2_eaa22"]
 [ext_resource type="Texture2D" uid="uid://il1wbcmxg3l" path="res://Assets/Sprites/UI/Ribbon_Blue_3Slides.png" id="2_lhd24"]
 [ext_resource type="FontFile" uid="uid://c4ubi6ftcm5ix" path="res://Assets/Fonts/The Wild Breath of Zelda.otf" id="3_g8bkl"]
 

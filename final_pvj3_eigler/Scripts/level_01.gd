@@ -1,7 +1,11 @@
 extends Node2D
 
+#Varian entre niveles
+@export var scene_Level_next: PackedScene
+@export var time_left: int
+
 var scene_Main_Menu = load("res://Scenes/MainMenu.tscn")
-var scene_Level_01 = load("res://Scenes/Level_01.tscn")
+
 @onready var color = $CanvasLayer/ColorRect
 @onready var TRectWin = $CanvasLayer/ColorRect/TextureRectWin
 @onready var TRectLose = $CanvasLayer/ColorRect/TextureRectLose
@@ -9,17 +13,16 @@ var scene_Level_01 = load("res://Scenes/Level_01.tscn")
 @onready var label = $CanvasLayer/Label
 @onready var player = $Player
 
-@export var time_left: int
 var level_finished = false
 var is_pause = false
 var paused_timer_time: float = 0.0
-
 var active_timer: SceneTreeTimer = null
 
 @onready var spawner = $Enemy_Spawner
-
 @onready var pause_on = $Pause_On
 @onready var pause_off = $Pause_Off
+@onready var game_over = $Game_over
+@onready var fanfare = $Win
 
 func _ready() -> void:
 	player.connect("died", Callable(self, "_on_player_died"))
@@ -90,25 +93,38 @@ func SetWinLevel():
 	for node in get_tree().get_nodes_in_group("Sheep"):
 		if node.has_method("_on_player_win"):
 			node._on_player_win()
-	get_tree().call_group_flags(SceneTree.GROUP_CALL_DEFAULT, "enemies", "SET_end", true)
+	get_tree().call_group_flags(SceneTree.GROUP_CALL_DEFAULT, "enemies", "SET_win", true)
 	player.SET_pause_or_end(true)
+	player.set_win()
 	level_finished = true
-	color.visible = true
-	TRectWin.visible = true
+	fanfare.play()
 
 
 func SetLoseLevel():
-	get_tree().call_group_flags(SceneTree.GROUP_CALL_DEFAULT, "enemies", "SET_end", true)
+	get_tree().call_group_flags(SceneTree.GROUP_CALL_DEFAULT, "enemies", "SET_lose", true)
 	player.SET_pause_or_end(true)
 	level_finished = true
-	color.visible = true
-	TRectLose.visible = true
+	game_over.play()
 
 
 func _on_button_restart_pressed() -> void:
-	get_tree().change_scene_to_packed(scene_Level_01)	
+	get_tree().reload_current_scene()
 
 
 func _on_button_menu_pressed() -> void:
 	get_tree().change_scene_to_packed(scene_Main_Menu)
 
+
+func _on_button_next_pressed() -> void:
+	get_tree().change_scene_to_packed(scene_Level_next)
+
+
+
+func _on_game_over_finished() -> void:
+	color.visible = true
+	TRectLose.visible = true
+
+
+func _on_win_finished() -> void:
+	color.visible = true
+	TRectWin.visible = true

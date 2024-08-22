@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://c2hdyraworarf"]
+[gd_scene load_steps=6 format=3 uid="uid://c2hdyraworarf"]
 
 [ext_resource type="Script" path="res://Scripts/MainMenu.gd" id="1_3gj3l"]
-[ext_resource type="Theme" uid="uid://c0bljv12kjjb" path="res://Themes/MainMenu.tres" id="2_71g7s"]
+[ext_resource type="Theme" uid="uid://c0bljv12kjjb" path="res://Themes/UI_Main_Theme.tres" id="2_71g7s"]
 [ext_resource type="FontFile" uid="uid://c4ubi6ftcm5ix" path="res://Assets/Fonts/The Wild Breath of Zelda.otf" id="3_wjhl6"]
+[ext_resource type="Texture2D" uid="uid://bvbua8r4af3qc" path="res://Assets/Sprites/UI/helpisontheway.png" id="4_b7e34"]
 
 [sub_resource type="ImageTexture" id="ImageTexture_mqxh5"]
 
@@ -63,6 +64,7 @@ text = "Quit"
 icon = SubResource("ImageTexture_mqxh5")
 
 [node name="Label" type="Label" parent="CanvasLayer"]
+visible = false
 anchors_preset = -1
 anchor_left = 0.311
 anchor_top = 0.193
@@ -78,5 +80,17 @@ theme_override_font_sizes/font_size = 90
 text = "Help is on the way
 "
 
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -366.5
+offset_right = 366.5
+offset_bottom = 709.0
+grow_horizontal = 2
+scale = Vector2(0.75, 0.75)
+texture = ExtResource("4_b7e34")
+
 [connection signal="pressed" from="CanvasLayer/VBoxContainer/Button_Play" to="." method="_on_button_play_pressed"]
+[connection signal="pressed" from="CanvasLayer/VBoxContainer/Button_Options" to="." method="_on_button_options_pressed"]
 [connection signal="pressed" from="CanvasLayer/VBoxContainer/Button_Quit" to="." method="_on_button_quit_pressed"]

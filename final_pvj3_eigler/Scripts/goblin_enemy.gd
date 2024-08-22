@@ -110,6 +110,8 @@ func _on_area_2d_body_exited(body: Node2D) -> void:
 
 
 func _on_animated_sprite_2d_animation_finished() -> void:
+	if(animated_sprite.animation == "explode"):
+		animated_sprite.visible = false
 	if(animated_sprite.animation == "Side_Attack" ||
 	animated_sprite.animation == "Up_Attack" ||
 	animated_sprite.animation == "Down_Attack"):
@@ -123,6 +125,10 @@ func _on_animated_sprite_2d_animation_finished() -> void:
 func SET_pause_or_end(state):
 	pause_or_end = state
 
-func SET_end(state):
+func SET_win(state):
 	pause_or_end = state
-	animated_sprite.visible = false
+	animated_sprite.play("explode")
+	
+func SET_lose(state):
+	pause_or_end = state
+	animated_sprite.play("celebrate")

@@ -31,6 +31,8 @@ var is_flashing = false
 @onready var Scream2 = $Scream2
 @onready var Scream3 = $Scream3
 
+var is_dead = false
+
 func _ready():
 	var HealthBars = get_tree().get_nodes_in_group("HealthBar")
 	if HealthBars.size() > 0:
@@ -61,8 +63,11 @@ func GetDamage(damage):
 	
 
 	
-	if(life <= 0):
+	if(life <= 0 && !is_dead):
+		is_dead = true
 		emit_signal("died")
+		print("AAASSSCCC")
+		animated_sprite.play("death")
 
 
 func GetLife(_life):
@@ -195,7 +200,11 @@ func _on_animated_sprite_2d_animation_finished() -> void:
 
 
 func SET_pause_or_end(state):
-	pause_or_end = state
+	pause_or_end = state	
+
+
+func set_win():
+	animated_sprite.play("celebrate")
 
 
 func _on_area_2d_body_entered(body: Node2D) -> void:

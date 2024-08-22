@@ -12,7 +12,7 @@ void fragment() {
     }
 	else if (damage_flash > 0.0) {
         COLOR = vec4(tex_color.r * 0.3, 0.8, tex_color.b * 0.3, tex_color.a);
-    } 
+    }
 	else {
         COLOR = tex_color;
     }

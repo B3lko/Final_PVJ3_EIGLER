@@ -1,0 +1,62 @@
+[gd_scene load_steps=4 format=3 uid="uid://bbq7044olagol"]
+
+[ext_resource type="PackedScene" uid="uid://cgpdldq3wdt1u" path="res://Scenes/volume_slider.tscn" id="1_grxv8"]
+[ext_resource type="Script" path="res://Scripts/options.gd" id="1_swned"]
+[ext_resource type="Theme" uid="uid://c0bljv12kjjb" path="res://Themes/UI_Main_Theme.tres" id="2_dp5ux"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 1.0
+offset_top = -49.0
+offset_right = 1.0
+offset_bottom = -49.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_swned")
+
+[node name="Button_back" type="Button" parent="."]
+layout_mode = 0
+offset_left = 55.0
+offset_top = 817.0
+offset_right = 255.0
+offset_bottom = 917.0
+theme = ExtResource("2_dp5ux")
+text = "Back"
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+theme = ExtResource("2_dp5ux")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer"]
+layout_mode = 2
+
+[node name="Master_Label" type="Label" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+text = "Master Volume"
+
+[node name="volume_master" parent="PanelContainer/VBoxContainer" instance=ExtResource("1_grxv8")]
+layout_mode = 2
+bus_name = "Master"
+
+[node name="Music_Label" type="Label" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+text = "MusicVolume"
+
+[node name="volume_music" parent="PanelContainer/VBoxContainer" instance=ExtResource("1_grxv8")]
+layout_mode = 2
+bus_name = "Music"
+
+[node name="SFX_Label" type="Label" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+text = "SFX Volume"
+
+[node name="volume_sfx" parent="PanelContainer/VBoxContainer" instance=ExtResource("1_grxv8")]
+layout_mode = 2
+bus_name = "SFX"
+
+[connection signal="pressed" from="Button_back" to="." method="_on_button_back_pressed"]
