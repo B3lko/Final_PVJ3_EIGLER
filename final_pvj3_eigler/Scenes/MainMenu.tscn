@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://c2hdyraworarf"]
+[gd_scene load_steps=7 format=3 uid="uid://c2hdyraworarf"]
 
 [ext_resource type="Script" path="res://Scripts/MainMenu.gd" id="1_3gj3l"]
 [ext_resource type="Theme" uid="uid://c0bljv12kjjb" path="res://Themes/UI_Main_Theme.tres" id="2_71g7s"]
 [ext_resource type="Texture2D" uid="uid://dkblkcmrlyk13" path="res://Assets/Sprites/UI/Logo.png" id="3_sph80"]
+[ext_resource type="AudioStream" uid="uid://cgbs68lrvh5wb" path="res://Assets/Audio/Music/field_theme_2.wav" id="5_offlh"]
 [ext_resource type="AudioStream" uid="uid://bmauphepfu15c" path="res://Assets/Audio/UI/Modern6.ogg" id="28_e2lti"]
 
 [sub_resource type="ImageTexture" id="ImageTexture_mqxh5"]
@@ -86,6 +87,11 @@ texture = ExtResource("3_sph80")
 [node name="Button_Hover" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("28_e2lti")
 bus = &"SFX"
+
+[node name="Music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_offlh")
+autoplay = true
+bus = &"Music"
 
 [connection signal="pressed" from="CanvasLayer/VBoxContainer/Button_Play" to="." method="_on_button_play_pressed"]
 [connection signal="pressed" from="CanvasLayer/VBoxContainer/Button_Options" to="." method="_on_button_options_pressed"]
