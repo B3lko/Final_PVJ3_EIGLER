@@ -1,4 +1,4 @@
-[gd_scene load_steps=81 format=3 uid="uid://df57ph0k7sgcc"]
+[gd_scene load_steps=82 format=3 uid="uid://df57ph0k7sgcc"]
 
 [ext_resource type="Texture2D" uid="uid://fsiltwn15yir" path="res://Assets/Sprites/Characters/Warrior_Blue.png" id="1_lerel"]
 [ext_resource type="Shader" path="res://Shaders/player.gdshader" id="1_nn5jc"]
@@ -10,6 +10,7 @@
 [ext_resource type="AudioStream" uid="uid://c8aj3j7ywpqsp" path="res://Assets/Audio/SFX/Player/damage_1_sean.wav" id="8_256qj"]
 [ext_resource type="AudioStream" uid="uid://41io4so7ticb" path="res://Assets/Audio/SFX/Player/damage_2_sean.wav" id="9_xa4t7"]
 [ext_resource type="AudioStream" uid="uid://dboh2be5na4ca" path="res://Assets/Audio/SFX/Player/damage_6_sean.wav" id="10_efwh0"]
+[ext_resource type="AudioStream" uid="uid://cqlblfr60chv4" path="res://Assets/Audio/SFX/Player/Modern13.wav" id="11_fe1c7"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_2wh5h"]
 shader = ExtResource("1_nn5jc")
@@ -591,6 +592,11 @@ bus = &"SFX"
 stream = ExtResource("10_efwh0")
 volume_db = -10.0
 bus = &"SFX"
+
+[node name="Steak" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("11_fe1c7")
+volume_db = 20.0
+pitch_scale = 1.2
 
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

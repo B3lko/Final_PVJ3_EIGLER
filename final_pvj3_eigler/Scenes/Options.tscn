@@ -1,8 +1,11 @@
-[gd_scene load_steps=4 format=3 uid="uid://bbq7044olagol"]
+[gd_scene load_steps=7 format=3 uid="uid://bbq7044olagol"]
 
 [ext_resource type="PackedScene" uid="uid://cgpdldq3wdt1u" path="res://Scenes/volume_slider.tscn" id="1_grxv8"]
 [ext_resource type="Script" path="res://Scripts/options.gd" id="1_swned"]
 [ext_resource type="Theme" uid="uid://c0bljv12kjjb" path="res://Themes/UI_Main_Theme.tres" id="2_dp5ux"]
+[ext_resource type="Texture2D" uid="uid://il1wbcmxg3l" path="res://Assets/Sprites/UI/Ribbon_Blue_3Slides.png" id="4_xmq78"]
+[ext_resource type="FontFile" uid="uid://c4ubi6ftcm5ix" path="res://Assets/Fonts/The Wild Breath of Zelda.otf" id="5_bcwqw"]
+[ext_resource type="AudioStream" uid="uid://bmauphepfu15c" path="res://Assets/Audio/UI/Modern6.ogg" id="6_roavi"]
 
 [node name="Control" type="Control"]
 layout_mode = 3
@@ -17,46 +20,100 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_swned")
 
-[node name="Button_back" type="Button" parent="."]
-layout_mode = 0
-offset_left = 55.0
-offset_top = 817.0
-offset_right = 255.0
-offset_bottom = 917.0
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.278431, 0.670588, 0.662745, 1)
+
+[node name="Button_back" type="Button" parent="CanvasLayer" groups=["button"]]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 72.0
+offset_top = -150.0
+offset_right = 322.0
+offset_bottom = -77.0
+grow_vertical = 0
 theme = ExtResource("2_dp5ux")
 text = "Back"
 
-[node name="PanelContainer" type="PanelContainer" parent="."]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -215.0
+offset_top = -130.0
+offset_right = 215.0
+offset_bottom = 247.0
+grow_horizontal = 2
+grow_vertical = 2
 theme = ExtResource("2_dp5ux")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/PanelContainer"]
 layout_mode = 2
+size_flags_horizontal = 4
 
-[node name="Master_Label" type="Label" parent="PanelContainer/VBoxContainer"]
+[node name="Master_Label" type="Label" parent="CanvasLayer/PanelContainer/VBoxContainer"]
 layout_mode = 2
 text = "Master Volume"
 
-[node name="volume_master" parent="PanelContainer/VBoxContainer" instance=ExtResource("1_grxv8")]
+[node name="volume_master" parent="CanvasLayer/PanelContainer/VBoxContainer" instance=ExtResource("1_grxv8")]
 layout_mode = 2
 bus_name = "Master"
 
-[node name="Music_Label" type="Label" parent="PanelContainer/VBoxContainer"]
+[node name="Music_Label" type="Label" parent="CanvasLayer/PanelContainer/VBoxContainer"]
 layout_mode = 2
 text = "MusicVolume"
 
-[node name="volume_music" parent="PanelContainer/VBoxContainer" instance=ExtResource("1_grxv8")]
+[node name="volume_music" parent="CanvasLayer/PanelContainer/VBoxContainer" instance=ExtResource("1_grxv8")]
 layout_mode = 2
 bus_name = "Music"
 
-[node name="SFX_Label" type="Label" parent="PanelContainer/VBoxContainer"]
+[node name="SFX_Label" type="Label" parent="CanvasLayer/PanelContainer/VBoxContainer"]
 layout_mode = 2
 text = "SFX Volume"
 
-[node name="volume_sfx" parent="PanelContainer/VBoxContainer" instance=ExtResource("1_grxv8")]
+[node name="volume_sfx" parent="CanvasLayer/PanelContainer/VBoxContainer" instance=ExtResource("1_grxv8")]
 layout_mode = 2
 bus_name = "SFX"
 
-[connection signal="pressed" from="Button_back" to="." method="_on_button_back_pressed"]
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -288.0
+offset_top = 90.0
+offset_right = 288.0
+offset_bottom = 282.0
+grow_horizontal = 2
+texture = ExtResource("4_xmq78")
+
+[node name="Label" type="Label" parent="CanvasLayer/TextureRect"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -116.5
+offset_top = -61.0
+offset_right = 116.5
+offset_bottom = 24.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("5_bcwqw")
+theme_override_font_sizes/font_size = 80
+text = "Options"
+
+[node name="Button_Hover" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_roavi")
+bus = &"SFX"
+
+[connection signal="pressed" from="CanvasLayer/Button_back" to="." method="_on_button_back_pressed"]

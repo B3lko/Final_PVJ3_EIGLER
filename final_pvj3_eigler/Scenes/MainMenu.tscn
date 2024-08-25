@@ -2,12 +2,12 @@
 
 [ext_resource type="Script" path="res://Scripts/MainMenu.gd" id="1_3gj3l"]
 [ext_resource type="Theme" uid="uid://c0bljv12kjjb" path="res://Themes/UI_Main_Theme.tres" id="2_71g7s"]
-[ext_resource type="FontFile" uid="uid://c4ubi6ftcm5ix" path="res://Assets/Fonts/The Wild Breath of Zelda.otf" id="3_wjhl6"]
-[ext_resource type="Texture2D" uid="uid://bvbua8r4af3qc" path="res://Assets/Sprites/UI/helpisontheway.png" id="4_b7e34"]
+[ext_resource type="Texture2D" uid="uid://dkblkcmrlyk13" path="res://Assets/Sprites/UI/Logo.png" id="3_sph80"]
+[ext_resource type="AudioStream" uid="uid://bmauphepfu15c" path="res://Assets/Audio/UI/Modern6.ogg" id="28_e2lti"]
 
 [sub_resource type="ImageTexture" id="ImageTexture_mqxh5"]
 
-[node name="Control" type="Control"]
+[node name="MainMenu" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -16,81 +16,78 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_3gj3l")
 
-[node name="ColorRect" type="ColorRect" parent="."]
-layout_mode = 1
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.134509, 0.32355, 0.573281, 1)
-
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+color = Color(0.278431, 0.670588, 0.662745, 1)
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer"]
-anchors_preset = -1
-anchor_left = 0.422
-anchor_top = 0.573
-anchor_right = 0.578
-anchor_bottom = 0.899
-offset_left = -0.200012
-offset_top = 12.3
-offset_right = 0.200012
-offset_bottom = -84.1
+z_index = 10
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -125.0
+offset_top = -440.0
+offset_right = 125.0
+offset_bottom = -40.0
 grow_horizontal = 2
 grow_vertical = 0
-scale = Vector2(1, 1.403)
+alignment = 1
 
-[node name="Button_Play" type="Button" parent="CanvasLayer/VBoxContainer"]
+[node name="Button_Play" type="Button" parent="CanvasLayer/VBoxContainer" groups=["button"]]
 layout_mode = 2
 theme = ExtResource("2_71g7s")
 theme_override_constants/h_separation = 0
-theme_override_font_sizes/font_size = 25
 text = "Play"
 icon = SubResource("ImageTexture_mqxh5")
 
-[node name="Button_Options" type="Button" parent="CanvasLayer/VBoxContainer"]
+[node name="Button_Options" type="Button" parent="CanvasLayer/VBoxContainer" groups=["button"]]
 layout_mode = 2
 theme = ExtResource("2_71g7s")
-theme_override_font_sizes/font_size = 25
+theme_override_font_sizes/font_size = 40
 text = "Options"
 icon = SubResource("ImageTexture_mqxh5")
 
-[node name="Button_Quit" type="Button" parent="CanvasLayer/VBoxContainer"]
+[node name="Button_Credits" type="Button" parent="CanvasLayer/VBoxContainer" groups=["button"]]
 layout_mode = 2
 theme = ExtResource("2_71g7s")
-theme_override_font_sizes/font_size = 25
+theme_override_constants/h_separation = 0
+theme_override_font_sizes/font_size = 40
+text = "Credits
+"
+icon = SubResource("ImageTexture_mqxh5")
+
+[node name="Button_Quit" type="Button" parent="CanvasLayer/VBoxContainer" groups=["button"]]
+layout_mode = 2
+theme = ExtResource("2_71g7s")
+theme_override_font_sizes/font_size = 40
 text = "Quit"
 icon = SubResource("ImageTexture_mqxh5")
 
-[node name="Label" type="Label" parent="CanvasLayer"]
-visible = false
-anchors_preset = -1
-anchor_left = 0.311
-anchor_top = 0.193
-anchor_right = 0.689
-anchor_bottom = 0.299
-offset_left = -0.100037
-offset_top = 0.300003
-offset_right = 0.0999756
-offset_bottom = -0.100037
-grow_horizontal = 2
-theme_override_fonts/font = ExtResource("3_wjhl6")
-theme_override_font_sizes/font_size = 90
-text = "Help is on the way
-"
-
 [node name="TextureRect" type="TextureRect" parent="CanvasLayer"]
+z_index = 10
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -366.5
-offset_right = 366.5
-offset_bottom = 709.0
+offset_left = -182.5
+offset_top = 60.0
+offset_right = 182.5
+offset_bottom = 414.0
 grow_horizontal = 2
-scale = Vector2(0.75, 0.75)
-texture = ExtResource("4_b7e34")
+texture = ExtResource("3_sph80")
+
+[node name="Button_Hover" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("28_e2lti")
+bus = &"SFX"
 
 [connection signal="pressed" from="CanvasLayer/VBoxContainer/Button_Play" to="." method="_on_button_play_pressed"]
 [connection signal="pressed" from="CanvasLayer/VBoxContainer/Button_Options" to="." method="_on_button_options_pressed"]
+[connection signal="pressed" from="CanvasLayer/VBoxContainer/Button_Credits" to="." method="_on_button_credits_pressed"]
 [connection signal="pressed" from="CanvasLayer/VBoxContainer/Button_Quit" to="." method="_on_button_quit_pressed"]

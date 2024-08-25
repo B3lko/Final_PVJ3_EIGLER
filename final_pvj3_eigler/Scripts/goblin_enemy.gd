@@ -24,6 +24,8 @@ var unique_material : ShaderMaterial
 signal died
 @onready var Attack_1 = $Attack_1
 @onready var Attack_2 = $Attack_2
+@onready var Damage_1 = $Damage_1
+@onready var Damage_2 = $Damage_2
 
 func _ready():
 	animated_sprite.play("walk")	
@@ -61,6 +63,11 @@ func move(delta):
 
 
 func GetDamage(gdamage):
+	var random_number = randi() % 2 + 1
+	if(random_number == 1):
+		Damage_1.play()
+	else:
+		Damage_2.play()
 	if not is_flashing:
 		is_flashing = true
 		unique_material.set("shader_parameter/damage_flash", 1.0)

@@ -30,6 +30,7 @@ var is_flashing = false
 @onready var Scream1 = $Scream1
 @onready var Scream2 = $Scream2
 @onready var Scream3 = $Scream3
+@onready var Steak = $Steak
 
 var is_dead = false
 
@@ -66,11 +67,11 @@ func GetDamage(damage):
 	if(life <= 0 && !is_dead):
 		is_dead = true
 		emit_signal("died")
-		print("AAASSSCCC")
 		animated_sprite.play("death")
 
 
 func GetLife(_life):
+	Steak.play()
 	if not is_flashing:
 		is_flashing = true
 		var material = animated_sprite.material as ShaderMaterial

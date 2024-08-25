@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://24410s0p8bku"]
+[gd_scene load_steps=7 format=3 uid="uid://24410s0p8bku"]
 
 [ext_resource type="Script" path="res://Scripts/SelectLevel.gd" id="1_a1ly7"]
 [ext_resource type="Theme" uid="uid://c0bljv12kjjb" path="res://Themes/UI_Main_Theme.tres" id="2_eaa22"]
 [ext_resource type="Texture2D" uid="uid://il1wbcmxg3l" path="res://Assets/Sprites/UI/Ribbon_Blue_3Slides.png" id="2_lhd24"]
 [ext_resource type="FontFile" uid="uid://c4ubi6ftcm5ix" path="res://Assets/Fonts/The Wild Breath of Zelda.otf" id="3_g8bkl"]
+[ext_resource type="AudioStream" uid="uid://bmauphepfu15c" path="res://Assets/Audio/UI/Modern6.ogg" id="5_63seo"]
 
 [sub_resource type="ImageTexture" id="ImageTexture_ccxxo"]
 
@@ -18,130 +19,146 @@ script = ExtResource("1_a1ly7")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="TextureRect" type="TextureRect" parent="CanvasLayer"]
-anchors_preset = -1
-anchor_left = 0.275
-anchor_top = 0.071
-anchor_right = 0.725
-anchor_bottom = 0.284
-offset_left = 240.0
-offset_top = 0.0999985
-offset_right = -240.0
-offset_bottom = -127.6
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
-scale = Vector2(3, 3)
+grow_vertical = 2
+color = Color(0.278431, 0.670588, 0.662745, 1)
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -288.0
+offset_top = 90.0
+offset_right = 288.0
+offset_bottom = 282.0
+grow_horizontal = 2
 pivot_offset = Vector2(120, 0)
 size_flags_horizontal = 4
 texture = ExtResource("2_lhd24")
 
 [node name="Label" type="Label" parent="CanvasLayer/TextureRect"]
 layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.232
-anchor_top = 0.203
-anchor_right = 0.771
-anchor_bottom = 0.602
-offset_left = 0.255001
-offset_top = 0.00799942
-offset_right = 301.895
-offset_bottom = 59.472
-grow_horizontal = 2
-scale = Vector2(0.3, 0.3)
-theme_override_fonts/font = ExtResource("3_g8bkl")
-theme_override_font_sizes/font_size = 80
-text = "Select a level"
-
-[node name="GridContainer" type="GridContainer" parent="CanvasLayer"]
-anchors_preset = -1
-anchor_left = 0.279
-anchor_top = 0.53
-anchor_right = 0.721
-anchor_bottom = 0.701
-offset_left = 0.599976
-offset_top = -3.05176e-05
-offset_right = -0.599976
-offset_bottom = 0.0999756
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -161.0
+offset_top = -45.0
+offset_right = 161.0
+offset_bottom = 19.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/h_separation = 40
-theme_override_constants/v_separation = 20
-columns = 5
+theme_override_fonts/font = ExtResource("3_g8bkl")
+theme_override_font_sizes/font_size = 60
+text = "Select a level"
 
-[node name="Button_Level_01" type="Button" parent="CanvasLayer/GridContainer"]
-layout_mode = 2
-theme = ExtResource("2_eaa22")
-text = "Level 01"
-icon = SubResource("ImageTexture_ccxxo")
-
-[node name="Button_Level_02" type="Button" parent="CanvasLayer/GridContainer"]
-layout_mode = 2
-theme = ExtResource("2_eaa22")
-text = "Level 02"
-icon = SubResource("ImageTexture_ccxxo")
-
-[node name="Button_Level_03" type="Button" parent="CanvasLayer/GridContainer"]
-layout_mode = 2
-size_flags_horizontal = 4
-theme = ExtResource("2_eaa22")
-theme_override_font_sizes/font_size = 25
-text = "Level 03"
-icon = SubResource("ImageTexture_ccxxo")
-
-[node name="Button_Level_04" type="Button" parent="CanvasLayer/GridContainer"]
-layout_mode = 2
-theme = ExtResource("2_eaa22")
-text = "Level 04"
-icon = SubResource("ImageTexture_ccxxo")
-
-[node name="Button_Level_05" type="Button" parent="CanvasLayer/GridContainer"]
-layout_mode = 2
-theme = ExtResource("2_eaa22")
-text = "Level 05"
-icon = SubResource("ImageTexture_ccxxo")
-
-[node name="Button_Level_06" type="Button" parent="CanvasLayer/GridContainer"]
-layout_mode = 2
-theme = ExtResource("2_eaa22")
-text = "Level 05"
-icon = SubResource("ImageTexture_ccxxo")
-
-[node name="Button_Level_07" type="Button" parent="CanvasLayer/GridContainer"]
-layout_mode = 2
-theme = ExtResource("2_eaa22")
-text = "Level 05"
-icon = SubResource("ImageTexture_ccxxo")
-
-[node name="Button_Level_08" type="Button" parent="CanvasLayer/GridContainer"]
-layout_mode = 2
-theme = ExtResource("2_eaa22")
-text = "Level 05"
-icon = SubResource("ImageTexture_ccxxo")
-
-[node name="Button_Level_09" type="Button" parent="CanvasLayer/GridContainer"]
-layout_mode = 2
-theme = ExtResource("2_eaa22")
-text = "Level 05"
-icon = SubResource("ImageTexture_ccxxo")
-
-[node name="Button_Level_10" type="Button" parent="CanvasLayer/GridContainer"]
-layout_mode = 2
-theme = ExtResource("2_eaa22")
-text = "Level 05"
-icon = SubResource("ImageTexture_ccxxo")
-
-[node name="Button_Back" type="Button" parent="CanvasLayer"]
+[node name="Button_Back" type="Button" parent="CanvasLayer" groups=["button"]]
 anchors_preset = -1
 anchor_left = 0.015
 anchor_top = 0.897
 anchor_right = 0.138
 anchor_bottom = 0.973
-offset_top = -0.299988
-offset_right = 0.199982
+offset_top = -4.30005
+offset_right = 53.2
 offset_bottom = 0.299927
 grow_vertical = 0
 theme = ExtResource("2_eaa22")
 text = "Back"
 icon = SubResource("ImageTexture_ccxxo")
 
-[connection signal="pressed" from="CanvasLayer/GridContainer/Button_Level_01" to="." method="_on_button_level_01_pressed"]
+[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -553.5
+offset_top = -82.0
+offset_right = 553.5
+offset_bottom = 254.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_eaa22")
+
+[node name="GridContainer" type="GridContainer" parent="CanvasLayer/PanelContainer"]
+layout_mode = 2
+theme_override_constants/h_separation = 40
+theme_override_constants/v_separation = 20
+columns = 5
+
+[node name="Button_Level_01" type="Button" parent="CanvasLayer/PanelContainer/GridContainer" groups=["button"]]
+layout_mode = 2
+theme = ExtResource("2_eaa22")
+text = "  Level 01  "
+icon = SubResource("ImageTexture_ccxxo")
+
+[node name="Button_Level_02" type="Button" parent="CanvasLayer/PanelContainer/GridContainer" groups=["button"]]
+layout_mode = 2
+theme = ExtResource("2_eaa22")
+text = "  Level 02  "
+icon = SubResource("ImageTexture_ccxxo")
+
+[node name="Button_Level_03" type="Button" parent="CanvasLayer/PanelContainer/GridContainer" groups=["button"]]
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("2_eaa22")
+text = "  Level 03  "
+icon = SubResource("ImageTexture_ccxxo")
+
+[node name="Button_Level_04" type="Button" parent="CanvasLayer/PanelContainer/GridContainer" groups=["button"]]
+layout_mode = 2
+theme = ExtResource("2_eaa22")
+text = "  Level 04  "
+icon = SubResource("ImageTexture_ccxxo")
+
+[node name="Button_Level_05" type="Button" parent="CanvasLayer/PanelContainer/GridContainer" groups=["button"]]
+layout_mode = 2
+theme = ExtResource("2_eaa22")
+text = "  Level 05  "
+icon = SubResource("ImageTexture_ccxxo")
+
+[node name="Button_Level_06" type="Button" parent="CanvasLayer/PanelContainer/GridContainer" groups=["button"]]
+layout_mode = 2
+theme = ExtResource("2_eaa22")
+text = "Level 06
+"
+icon = SubResource("ImageTexture_ccxxo")
+
+[node name="Button_Level_07" type="Button" parent="CanvasLayer/PanelContainer/GridContainer" groups=["button"]]
+layout_mode = 2
+theme = ExtResource("2_eaa22")
+text = "Level 07
+"
+icon = SubResource("ImageTexture_ccxxo")
+
+[node name="Button_Level_08" type="Button" parent="CanvasLayer/PanelContainer/GridContainer" groups=["button"]]
+layout_mode = 2
+theme = ExtResource("2_eaa22")
+text = "Level 08
+"
+icon = SubResource("ImageTexture_ccxxo")
+
+[node name="Button_Level_09" type="Button" parent="CanvasLayer/PanelContainer/GridContainer" groups=["button"]]
+layout_mode = 2
+theme = ExtResource("2_eaa22")
+text = "Level 09"
+icon = SubResource("ImageTexture_ccxxo")
+
+[node name="Button_Level_10" type="Button" parent="CanvasLayer/PanelContainer/GridContainer" groups=["button"]]
+layout_mode = 2
+theme = ExtResource("2_eaa22")
+text = "Level 10"
+icon = SubResource("ImageTexture_ccxxo")
+
+[node name="Button_Hover" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_63seo")
+bus = &"SFX"
+
 [connection signal="pressed" from="CanvasLayer/Button_Back" to="." method="_on_button_back_pressed"]
+[connection signal="pressed" from="CanvasLayer/PanelContainer/GridContainer/Button_Level_01" to="." method="_on_button_level_01_pressed"]
+[connection signal="pressed" from="CanvasLayer/PanelContainer/GridContainer/Button_Level_02" to="." method="_on_button_level_02_pressed"]

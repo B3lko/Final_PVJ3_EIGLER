@@ -1,4 +1,4 @@
-[gd_scene load_steps=55 format=3 uid="uid://dgs42yeyik5kh"]
+[gd_scene load_steps=57 format=3 uid="uid://dgs42yeyik5kh"]
 
 [ext_resource type="Shader" path="res://Shaders/goblin_enemy.gdshader" id="1_5bf3r"]
 [ext_resource type="Script" path="res://Scripts/goblin_enemy.gd" id="1_8wp1u"]
@@ -6,6 +6,8 @@
 [ext_resource type="AudioStream" uid="uid://c0w4jebybpevk" path="res://Assets/Audio/SFX/warfare_medieval_katana_sword_swing_002.mp3" id="4_fhupf"]
 [ext_resource type="AudioStream" uid="uid://bd0dgxhcheg61" path="res://Assets/Audio/SFX/warfare_medieval_katana_sword_swing_001.mp3" id="4_flq58"]
 [ext_resource type="Texture2D" uid="uid://d3str2is7ujgm" path="res://Assets/Sprites/Characters/Explosions.png" id="4_jiok4"]
+[ext_resource type="AudioStream" uid="uid://cgko4sgm35xr8" path="res://Assets/Audio/SFX/misc_18.wav" id="7_fodb0"]
+[ext_resource type="AudioStream" uid="uid://b0gakai0n15ha" path="res://Assets/Audio/SFX/misc_21.wav" id="9_wxv4n"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_a4yx3"]
 shader = ExtResource("1_5bf3r")
@@ -363,6 +365,7 @@ size = Vector2(34, 37)
 z_index = 6
 script = ExtResource("1_8wp1u")
 shader_material_resource = SubResource("ShaderMaterial_a4yx3")
+probability = 100
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 material = SubResource("ShaderMaterial_ayx31")
@@ -394,6 +397,17 @@ bus = &"SFX"
 [node name="Attack_2" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_fhupf")
 volume_db = 10.0
+bus = &"SFX"
+
+[node name="Damage_1" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_fodb0")
+volume_db = -5.0
+pitch_scale = 1.2
+bus = &"SFX"
+
+[node name="Damage_2" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("9_wxv4n")
+pitch_scale = 1.2
 bus = &"SFX"
 
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
