@@ -9,6 +9,7 @@ var config_file_path: String = "user://audio_settings.json"
 
 
 func _ready():
+	AudioManager.play_audio()
 	for button in get_tree().get_nodes_in_group("button"):
 		if button is Button:
 			button.connect("mouse_entered", Callable(self, "_on_button_mouse_entered"))

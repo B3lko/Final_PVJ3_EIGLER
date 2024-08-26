@@ -28,6 +28,7 @@ var active_timer: SceneTreeTimer = null
 @onready var Spawner = $Enemy_Spawner
 
 func _ready() -> void:
+	AudioManager.stop_audio()
 	player.connect("died", Callable(self, "_on_player_died"))
 	label.text = str(time_left)
 	create_timer()

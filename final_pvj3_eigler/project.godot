@@ -22,6 +22,10 @@ config/features=PackedStringArray("4.3", "Forward Plus")
 
 buses/default_bus_layout="res://Bus_Layout/default_bus_layout.tres"
 
+[autoload]
+
+AudioManager="*res://Scripts/audio_manager.gd"
+
 [display]
 
 window/size/viewport_width=1600
