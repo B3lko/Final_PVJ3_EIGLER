@@ -2,6 +2,7 @@ extends Control
 
 var scene_Select_Level = load("res://Scenes/SelectLevel.tscn")
 var scene_options = load("res://Scenes/Options.tscn")
+var scene_credits = load("res://Scenes/credits.tscn")
 @onready var hover_sound = $Button_Hover
 
 var config_file_path: String = "user://audio_settings.json"
@@ -56,4 +57,4 @@ func _on_button_options_pressed() -> void:
 
 
 func _on_button_credits_pressed() -> void:
-	pass # Replace with function body.
+	get_tree().change_scene_to_packed(scene_credits)

@@ -42,48 +42,6 @@ grow_vertical = 0
 theme = ExtResource("2_dp5ux")
 text = "Back"
 
-[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer"]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -215.0
-offset_top = -130.0
-offset_right = 215.0
-offset_bottom = 247.0
-grow_horizontal = 2
-grow_vertical = 2
-theme = ExtResource("2_dp5ux")
-
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/PanelContainer"]
-layout_mode = 2
-size_flags_horizontal = 4
-
-[node name="Master_Label" type="Label" parent="CanvasLayer/PanelContainer/VBoxContainer"]
-layout_mode = 2
-text = "Master Volume"
-
-[node name="volume_master" parent="CanvasLayer/PanelContainer/VBoxContainer" instance=ExtResource("1_grxv8")]
-layout_mode = 2
-bus_name = "Master"
-
-[node name="Music_Label" type="Label" parent="CanvasLayer/PanelContainer/VBoxContainer"]
-layout_mode = 2
-text = "MusicVolume"
-
-[node name="volume_music" parent="CanvasLayer/PanelContainer/VBoxContainer" instance=ExtResource("1_grxv8")]
-layout_mode = 2
-bus_name = "Music"
-
-[node name="SFX_Label" type="Label" parent="CanvasLayer/PanelContainer/VBoxContainer"]
-layout_mode = 2
-text = "SFX Volume"
-
-[node name="volume_sfx" parent="CanvasLayer/PanelContainer/VBoxContainer" instance=ExtResource("1_grxv8")]
-layout_mode = 2
-bus_name = "SFX"
-
 [node name="TextureRect" type="TextureRect" parent="CanvasLayer"]
 anchors_preset = 5
 anchor_left = 0.5
@@ -112,8 +70,76 @@ theme_override_fonts/font = ExtResource("5_bcwqw")
 theme_override_font_sizes/font_size = 80
 text = "Options"
 
+[node name="GridContainer" type="GridContainer" parent="CanvasLayer"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -402.5
+offset_top = -124.0
+offset_right = 402.5
+offset_bottom = 253.0
+grow_horizontal = 2
+grow_vertical = 2
+columns = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/GridContainer"]
+layout_mode = 2
+theme = ExtResource("2_dp5ux")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/GridContainer/PanelContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="Master_Label" type="Label" parent="CanvasLayer/GridContainer/PanelContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.0862745, 0.109804, 0.180392, 1)
+text = "Master Volume"
+
+[node name="volume_master" parent="CanvasLayer/GridContainer/PanelContainer/VBoxContainer" instance=ExtResource("1_grxv8")]
+layout_mode = 2
+bus_name = "Master"
+
+[node name="Music_Label" type="Label" parent="CanvasLayer/GridContainer/PanelContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.0862745, 0.109804, 0.180392, 1)
+text = "MusicVolume"
+
+[node name="volume_music" parent="CanvasLayer/GridContainer/PanelContainer/VBoxContainer" instance=ExtResource("1_grxv8")]
+layout_mode = 2
+bus_name = "Music"
+
+[node name="SFX_Label" type="Label" parent="CanvasLayer/GridContainer/PanelContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.0862745, 0.109804, 0.180392, 1)
+text = "SFX Volume"
+
+[node name="volume_sfx" parent="CanvasLayer/GridContainer/PanelContainer/VBoxContainer" instance=ExtResource("1_grxv8")]
+layout_mode = 2
+bus_name = "SFX"
+
+[node name="PanelContainer2" type="PanelContainer" parent="CanvasLayer/GridContainer"]
+layout_mode = 2
+theme = ExtResource("2_dp5ux")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/GridContainer/PanelContainer2"]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="FS_Label" type="Label" parent="CanvasLayer/GridContainer/PanelContainer2/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.0862745, 0.109804, 0.180392, 1)
+text = "Full Screen"
+
+[node name="FullScreen" type="Button" parent="CanvasLayer/GridContainer/PanelContainer2/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "ON / OFF"
+
 [node name="Button_Hover" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("6_roavi")
 bus = &"SFX"
 
 [connection signal="pressed" from="CanvasLayer/Button_back" to="." method="_on_button_back_pressed"]
+[connection signal="pressed" from="CanvasLayer/GridContainer/PanelContainer2/VBoxContainer/FullScreen" to="." method="_on_full_screen_pressed"]

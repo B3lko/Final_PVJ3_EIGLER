@@ -15,7 +15,7 @@ SFX=0.0
 [application]
 
 config/name="FINAL_PVJ3_EIGLER"
-run/main_scene="res://Scenes/Level_01.tscn"
+run/main_scene="res://Scenes/MainMenu.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
 
 [audio]
@@ -26,6 +26,7 @@ buses/default_bus_layout="res://Bus_Layout/default_bus_layout.tres"
 
 window/size/viewport_width=1600
 window/size/viewport_height=900
+mouse_cursor/custom_image="res://Assets/Sprites/UI/cursor.png"
 
 [global_group]
 

@@ -25,6 +25,8 @@ var active_timer: SceneTreeTimer = null
 @onready var fanfare = $Win
 @onready var music = $Music
 
+@onready var Spawner = $Enemy_Spawner
+
 func _ready() -> void:
 	player.connect("died", Callable(self, "_on_player_died"))
 	label.text = str(time_left)
@@ -91,6 +93,7 @@ func _on_player_died() -> void:
 
 
 func SetWinLevel():
+	Spawner.ready_start = false
 	music.stop()
 	for node in get_tree().get_nodes_in_group("Sheep"):
 		if node.has_method("_on_player_win"):
@@ -103,6 +106,7 @@ func SetWinLevel():
 
 
 func SetLoseLevel():
+	Spawner.ready_start = false
 	music.stop()
 	get_tree().call_group_flags(SceneTree.GROUP_CALL_DEFAULT, "enemies", "SET_lose", true)
 	player.SET_pause_or_end(true)

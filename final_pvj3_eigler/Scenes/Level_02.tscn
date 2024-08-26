@@ -393,7 +393,7 @@ outlines = Array[PackedVector2Array]([PackedVector2Array(-368, 431, -368, 749, 2
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource("1_6db0w")
-time_left = 10
+time_left = 90
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = SubResource("TileSet_87qnk")
@@ -435,15 +435,10 @@ position = Vector2(950, 382)
 script = ExtResource("28_7hor5")
 
 [node name="TextureRect" type="TextureRect" parent="CanvasLayer"]
-anchors_preset = -1
-anchor_left = 0.019
-anchor_top = 0.033
-anchor_right = 0.179
-anchor_bottom = 0.104
-offset_left = -0.400002
-offset_top = 0.299999
-offset_right = -192.4
-offset_bottom = -47.6
+offset_left = 35.0
+offset_top = 35.0
+offset_right = 99.0
+offset_bottom = 51.0
 scale = Vector2(4, 4)
 texture = ExtResource("29_og5yi")
 

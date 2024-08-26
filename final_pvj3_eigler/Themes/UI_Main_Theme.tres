@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=11 format=3 uid="uid://c0bljv12kjjb"]
+[gd_resource type="Theme" load_steps=13 format=3 uid="uid://c0bljv12kjjb"]
 
 [ext_resource type="FontFile" uid="uid://c4ubi6ftcm5ix" path="res://Assets/Fonts/The Wild Breath of Zelda.otf" id="1_wmrun"]
 [ext_resource type="Texture2D" uid="uid://dmdaanht0axaw" path="res://Assets/Sprites/UI/02.png" id="2_ltrcw"]
@@ -41,6 +41,12 @@ texture_margin_bottom = 25.0
 expand_margin_top = 3.0
 expand_margin_bottom = 1.0
 
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_4lycb"]
+texture = ExtResource("4_sa7kb")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_5bo3q"]
+texture = ExtResource("3_0q1p4")
+
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_kcpe2"]
 texture = ExtResource("5_mnkaj")
 texture_margin_left = 75.0
@@ -56,6 +62,12 @@ Button/styles/focus = SubResource("StyleBoxTexture_qmo16")
 Button/styles/hover = SubResource("StyleBoxTexture_i00ge")
 Button/styles/normal = SubResource("StyleBoxTexture_ymfxj")
 Button/styles/pressed = SubResource("StyleBoxTexture_58q8u")
+CheckButton/icons/checked_disabled = null
+CheckButton/icons/checked_disabled_mirrored = null
+CheckButton/icons/unchecked = null
+CheckButton/icons/unchecked_disabled = null
+CheckButton/styles/disabled = SubResource("StyleBoxTexture_4lycb")
+CheckButton/styles/focus = SubResource("StyleBoxTexture_5bo3q")
 Label/font_sizes/font_size = 50
 Label/fonts/font = ExtResource("1_wmrun")
 PanelContainer/styles/panel = SubResource("StyleBoxTexture_kcpe2")
