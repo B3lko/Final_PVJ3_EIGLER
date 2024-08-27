@@ -132,7 +132,7 @@ layout_mode = 2
 theme_override_colors/font_color = Color(0.0862745, 0.109804, 0.180392, 1)
 text = "Full Screen"
 
-[node name="FullScreen" type="Button" parent="CanvasLayer/GridContainer/PanelContainer2/VBoxContainer"]
+[node name="FullScreen" type="Button" parent="CanvasLayer/GridContainer/PanelContainer2/VBoxContainer" groups=["button"]]
 layout_mode = 2
 theme_override_font_sizes/font_size = 40
 text = "ON / OFF"

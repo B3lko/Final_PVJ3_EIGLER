@@ -9,11 +9,7 @@ var direction = "right"
 var pause_or_end = false
 @export var m_damage = 20 
 
-var enemies_in_area: Array = []
-
 signal died
-
-@onready var CS2DAttack = $Area2D/CollisionShape2D
 
 var is_blinking = false
 @export var blink_duration = 1
@@ -34,13 +30,13 @@ var is_flashing = false
 
 var is_dead = false
 
+const arrow = preload("res://Scenes/arrow.tscn")
 
 func _ready():
 	var HealthBars = get_tree().get_nodes_in_group("HealthBar")
 	if HealthBars.size() > 0:
 		HealthBar = HealthBars[0]
-	CS2DAttack.shape.extents = Vector2(75, 30)
-	CS2DAttack.position = Vector2(35, 0)
+
 
 
 func GetDamage(damage):
@@ -86,6 +82,20 @@ func GetLife(_life):
 	HealthBar.update_health_bar(life)
 
 
+func shoot():
+	var dif_x = get_global_mouse_position().x - position.x
+	var dif_y = get_global_mouse_position().y - position.y
+	var ang_rad = atan2(dif_x, dif_y)
+	var ang_deg = rad_to_deg(ang_rad)
+	ang_deg -= 90
+	if ang_deg < 0:
+		ang_deg += 360
+	ang_deg = deg_to_rad(ang_deg)
+	var disparo = arrow.instantiate()
+	disparo.init(ang_deg, position.x, position.y, name)
+	get_parent().add_child(disparo)
+
+
 func _physics_process(delta):
 	if !pause_or_end:
 		if (!isAttacking):
@@ -116,60 +126,41 @@ func attack():
 			Sword_2.play()
 		else:
 			Sword_1.play()
-		#Ataque arriva
 		if (direction == "up"):
-			if(random_number == 1):
-				animated_sprite.play("attack_up_01")
-			else:
-				animated_sprite.play("attack_up_02")
-		
-		#Ataque abajo
-		if (direction == "down"):
-			if(random_number == 1):
-				animated_sprite.play("attack_down_01")
-			else:
-				animated_sprite.play("attack_down_02")
-				
-		#Ataque de izquierda y/o derecha
-		if (direction == "left" || direction == "right"):
-			if(random_number == 1):
-				animated_sprite.play("attack_01")
-			else:
-				animated_sprite.play("attack_02")
+			animated_sprite.play("attack_up_01")
+		elif (direction == "down"):
+			animated_sprite.play("attack_down_01")
+		elif (direction == "left"):
+			animated_sprite.scale.x = -1;
+			animated_sprite.play("attack_01")
+		elif (direction == "right"):
+			animated_sprite.scale.x = 1;			
+			animated_sprite.play("attack_01")
 
 
 func move_character(_delta):
 	var input_direction = Input.get_vector("move_left", "move_right", "move_up", "move_bottom")
 	velocity = input_direction * SPEED
 	move_and_slide()
-	getDirection(input_direction)
+	get_direction(input_direction)
 	
-func getDirection(input_direction):
-	if (input_direction.x != 0 || input_direction.y != 0):
-		if(!Walk_Grass.is_playing()):
-			Walk_Grass.play()
-	if abs(input_direction.x) > abs(input_direction.y):
-		if input_direction.x > 0:
-			force = Vector2(force_value, 0)						
-			CS2DAttack.shape.extents = Vector2(60, 30)
-			CS2DAttack.position = Vector2(35, 0)
+func get_direction(input_direction):
+	var mouse_position = get_global_mouse_position()
+	var player_position = global_position
+	var direction_vector = mouse_position - player_position
+	if abs(direction_vector.x) > abs(direction_vector.y):
+		if direction_vector.x > 0:
 			direction = "right"
-		elif input_direction.x < 0:
-			force = Vector2(-force_value, 0)			
-			CS2DAttack.shape.extents = Vector2(60, 30)
-			CS2DAttack.position = Vector2(-35, 0)
+		else:
 			direction = "left"
 	else:
-		if input_direction.y < 0:
-			force = Vector2(0, -force_value)			
-			CS2DAttack.shape.extents = Vector2(30, 60)
-			CS2DAttack.position = Vector2(0, -35)
+		if direction_vector.y < 0:
 			direction = "up"
-		elif input_direction.y > 0:
-			force = Vector2(0, force_value)			
-			CS2DAttack.shape.extents = Vector2(30, 60)
-			CS2DAttack.position = Vector2(0, 35)
+		else:
 			direction = "down"
+	if (input_direction.x != 0 || input_direction.y != 0):
+		if !Walk_Grass.is_playing():
+			Walk_Grass.play()
 
 
 func update_animations():
@@ -187,16 +178,9 @@ func update_animations():
 
 func _on_animated_sprite_2d_animation_finished() -> void:
 	if(animated_sprite.animation == "attack_01"
-	|| animated_sprite.animation == "attack_02"
 	|| animated_sprite.animation == "attack_down_01"
-	|| animated_sprite.animation == "attack_down_02"
-	|| animated_sprite.animation == "attack_up_01"
-	|| animated_sprite.animation == "attack_up_02"):
-		for body in enemies_in_area:
-			if body.has_method("GetDamage"):
-				#Sword_1.play()
-				body.GetDamage(m_damage)
-				body.velocity += force				
+	|| animated_sprite.animation == "attack_up_01"):
+		shoot()
 		isAttacking = false
 		animated_sprite.play("idle")	
 
@@ -207,16 +191,6 @@ func SET_pause_or_end(state):
 
 func set_win():
 	animated_sprite.play("celebrate")
-
-
-func _on_area_2d_body_entered(body: Node2D) -> void:
-	if (body.is_in_group("enemies")):
-		enemies_in_area.append(body)
-
-
-func _on_area_2d_body_exited(body: Node2D) -> void:
-	if enemies_in_area.has(body):
-		enemies_in_area.erase(body)
 
 
 func _on_area_2d_get_items_area_entered(area: Area2D) -> void:

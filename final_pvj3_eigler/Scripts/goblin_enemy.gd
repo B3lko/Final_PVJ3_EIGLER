@@ -139,3 +139,9 @@ func SET_win(state):
 func SET_lose(state):
 	pause_or_end = state
 	animated_sprite.play("celebrate")
+
+
+func _on_area_arrow_area_entered(area: Area2D) -> void:
+	if(area.is_in_group("arrow")):
+		if(area.get_performer() != name):
+			GetDamage(area.damage)

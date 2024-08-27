@@ -32,6 +32,8 @@ var current_button_index: int = 0
 
 var aux = true
 
+var cursor_speed = 400.0
+
 func _ready() -> void:
 	update_active_buttons()
 	AudioManager.stop_audio()
@@ -46,12 +48,30 @@ func update_z_index_by_group(group_name: String):
 
 
 func _process(_delta: float) -> void:
+	update_cursor_gp(_delta)
 	btn_process()
 	if aux:
 		update_z_index_by_group("enemies_sprite")
 		update_z_index_by_group("Player")
 	if(!level_finished):
 		pause_controller()
+
+
+func update_cursor_gp(delta):
+	 # Obtener las entradas de la palanca izquierda del gamepad
+	var left_stick_x = Input.get_action_strength("right_stick_right") - Input.get_action_strength("right_stick_left")
+	var left_stick_y = Input.get_action_strength("right_stick_down") - Input.get_action_strength("right_stick_up")
+	
+	# Calcular la nueva posición del cursor
+	var mouse_position = get_viewport().get_mouse_position()
+	var new_position = mouse_position + Vector2(left_stick_x, left_stick_y) * cursor_speed * delta
+	
+	# Limitar el cursor a la ventana de la pantalla
+	new_position.x = clamp(new_position.x, 0, get_viewport().size.x)
+	new_position.y = clamp(new_position.y, 0, get_viewport().size.y)
+	
+	# Mover el cursor a la nueva posición
+	get_viewport().warp_mouse(new_position)
 
 
 func btn_process():
