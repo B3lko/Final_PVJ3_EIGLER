@@ -8,7 +8,12 @@ var scene_credits = load("res://Scenes/credits.tscn")
 var config_file_path: String = "user://audio_settings.json"
 
 
+var buttons: Array[Button] = []
+var current_button_index: int = 0
+
+
 func _ready():
+	btns_ready()
 	AudioManager.play_audio()
 	for button in get_tree().get_nodes_in_group("button"):
 		if button is Button:
@@ -16,6 +21,19 @@ func _ready():
 	apply_audio_settings("Master")
 	apply_audio_settings("Music")
 	apply_audio_settings("SFX")
+
+
+func btns_ready():
+	var vbox_container = $CanvasLayer/VBoxContainer
+	for child in vbox_container.get_children():
+		if child is Button:
+			buttons.append(child)
+	if buttons.size() > 0:
+		buttons[current_button_index].grab_focus()
+
+
+func _process(delta: float) -> void:
+	gp_process()
 
 
 func apply_audio_settings(bus_name: String) -> void:
@@ -59,3 +77,22 @@ func _on_button_options_pressed() -> void:
 
 func _on_button_credits_pressed() -> void:
 	get_tree().change_scene_to_packed(scene_credits)
+
+
+func gp_process():
+	if Input.is_action_just_pressed("ui_down"):
+		move_focus(1)
+	elif Input.is_action_just_pressed("ui_up"):
+		move_focus(-1)
+	elif Input.is_action_just_pressed("enter"):
+		buttons[current_button_index].emit_signal("pressed")
+
+
+func move_focus(direction: int):
+	buttons[current_button_index].release_focus()
+	current_button_index += direction
+	if current_button_index >= buttons.size():
+		current_button_index = 0
+	elif current_button_index < 0:
+		current_button_index = buttons.size() - 1
+	buttons[current_button_index].grab_focus()

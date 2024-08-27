@@ -27,7 +27,13 @@ var active_timer: SceneTreeTimer = null
 
 @onready var Spawner = $Enemy_Spawner
 
+var buttons: Array[Button] = []
+var current_button_index: int = 0
+
+var aux = true
+
 func _ready() -> void:
+	update_active_buttons()
 	AudioManager.stop_audio()
 	player.connect("died", Callable(self, "_on_player_died"))
 	label.text = str(time_left)
@@ -40,10 +46,24 @@ func update_z_index_by_group(group_name: String):
 
 
 func _process(_delta: float) -> void:
-	update_z_index_by_group("enemies_sprite")
-	update_z_index_by_group("Player")
+	btn_process()
+	if aux:
+		update_z_index_by_group("enemies_sprite")
+		update_z_index_by_group("Player")
 	if(!level_finished):
 		pause_controller()
+
+
+func btn_process():
+	if buttons.size() == 0:
+		return
+	if Input.is_action_just_pressed("ui_down") || Input.is_action_just_pressed("ui_right"):
+		move_focus(1)
+	elif Input.is_action_just_pressed("ui_up") || Input.is_action_just_pressed("ui_left"):
+		move_focus(-1)
+	elif Input.is_action_just_pressed("enter"):
+		aux = false
+		buttons[current_button_index].emit_signal("pressed")
 
 
 func pause_controller():
@@ -67,6 +87,7 @@ func pause_controller():
 			spawner.pause_spawn_timers()
 			get_tree().call_group_flags(SceneTree.GROUP_CALL_DEFAULT, "enemies", "SET_pause_or_end", true)
 			player.SET_pause_or_end(true)
+			update_active_buttons()
 			if active_timer:
 				paused_timer_time = active_timer.time_left
 				active_timer = null
@@ -115,6 +136,35 @@ func SetLoseLevel():
 	game_over.play()
 
 
+func update_active_buttons():
+	buttons.clear()
+	current_button_index = 0
+	if $CanvasLayer/ColorRect/TextureRectPause.visible:
+		add_buttons_from_container($CanvasLayer/ColorRect/TextureRectPause/GridContainer)
+	elif $CanvasLayer/ColorRect/TextureRectWin.visible:
+		add_buttons_from_container($CanvasLayer/ColorRect/TextureRectWin/GridContainer)
+	elif $CanvasLayer/ColorRect/TextureRectLose.visible:
+		add_buttons_from_container($CanvasLayer/ColorRect/TextureRectLose/GridContainer)
+	if buttons.size() > 0:
+		buttons[current_button_index].grab_focus()
+
+
+func add_buttons_from_container(container: Node):
+	for child in container.get_children():
+		if child is Button:
+			buttons.append(child)
+
+
+func move_focus(direction: int):
+	buttons[current_button_index].release_focus()
+	current_button_index += direction
+	if current_button_index >= buttons.size():
+		current_button_index = 0
+	elif current_button_index < 0:
+		current_button_index = buttons.size() - 1
+	buttons[current_button_index].grab_focus()
+
+
 func _on_button_restart_pressed() -> void:
 	get_tree().reload_current_scene()
 
@@ -127,12 +177,13 @@ func _on_button_next_pressed() -> void:
 	get_tree().change_scene_to_packed(scene_Level_next)
 
 
-
 func _on_game_over_finished() -> void:
 	color.visible = true
 	TRectLose.visible = true
+	update_active_buttons()
 
 
 func _on_win_finished() -> void:
 	color.visible = true
 	TRectWin.visible = true
+	update_active_buttons()
