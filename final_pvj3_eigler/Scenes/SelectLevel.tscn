@@ -162,3 +162,4 @@ bus = &"SFX"
 [connection signal="pressed" from="CanvasLayer/Button_Back" to="." method="_on_button_back_pressed"]
 [connection signal="pressed" from="CanvasLayer/PanelContainer/GridContainer/Button_Level_01" to="." method="_on_button_level_01_pressed"]
 [connection signal="pressed" from="CanvasLayer/PanelContainer/GridContainer/Button_Level_02" to="." method="_on_button_level_02_pressed"]
+[connection signal="pressed" from="CanvasLayer/PanelContainer/GridContainer/Button_Level_03" to="." method="_on_button_level_03_pressed"]

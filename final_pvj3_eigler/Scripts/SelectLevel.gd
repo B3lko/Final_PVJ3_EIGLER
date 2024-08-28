@@ -3,6 +3,7 @@ extends Control
 var scene_Main_Menu = load("res://Scenes/MainMenu.tscn")
 var scene_Level_01 = load("res://Scenes/Level_01.tscn")
 var scene_Level_02 = load("res://Scenes/Level_02.tscn")
+var scene_Level_03 = load("res://Scenes/Level_03.tscn")
 
 @onready var hover_sound = $Button_Hover
 
@@ -64,4 +65,9 @@ func _on_button_level_01_pressed() -> void:
 
 
 func _on_button_level_02_pressed() -> void:
-		get_tree().change_scene_to_packed(scene_Level_02)
+	get_tree().change_scene_to_packed(scene_Level_02)
+
+
+func _on_button_level_03_pressed() -> void:
+	get_tree().change_scene_to_packed(scene_Level_03)
+	
