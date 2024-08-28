@@ -1,7 +1,8 @@
-[gd_scene load_steps=74 format=3 uid="uid://bfyvqtde6j804"]
+[gd_scene load_steps=75 format=3 uid="uid://bfyvqtde6j804"]
 
 [ext_resource type="Script" path="res://Scripts/level_01.gd" id="1_6db0w"]
 [ext_resource type="Texture2D" uid="uid://c0lu7yes65ugt" path="res://Assets/Sprites/Tiles/Tilemap_Elevation.png" id="2_a5jhh"]
+[ext_resource type="PackedScene" uid="uid://b5j4a5yw6dbv8" path="res://Scenes/Level_03.tscn" id="2_k5gw0"]
 [ext_resource type="Texture2D" uid="uid://bhvs1b861057i" path="res://Assets/Sprites/Tiles/Tilemap_Flat.png" id="3_ddvw7"]
 [ext_resource type="Texture2D" uid="uid://bejf8x70ss5x1" path="res://Assets/Sprites/Tiles/Deco/04.png" id="4_0xpb3"]
 [ext_resource type="Texture2D" uid="uid://b0pqcepni75cn" path="res://Assets/Sprites/Tiles/Deco/05.png" id="5_buvk4"]
@@ -393,6 +394,7 @@ outlines = Array[PackedVector2Array]([PackedVector2Array(-368, 431, -368, 749, 2
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource("1_6db0w")
+scene_Level_next = ExtResource("2_k5gw0")
 time_left = 90
 
 [node name="TileMap" type="TileMap" parent="."]

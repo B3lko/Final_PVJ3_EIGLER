@@ -7,7 +7,7 @@ extends Area2D
 @export var living_enemies: int
 @export var wait_spawn = 3
 @export var enemy_variants: int
-
+@export var probability = 30
 var spawned = 0
 
 var ready_start = false
@@ -86,12 +86,16 @@ func _clean_up_timers() -> void:
 func spawn():
 	var random_position = get_random_point_in_region(get_node(navigation_region_path))
 	spawned += 1
-	var random_number = randi() % enemy_variants + 1
 	var enemi_instance
-	if(random_number == 1):
+	if(enemy_variants == 1):
 		enemi_instance = Enemy_1.instantiate()
 	else:
-		enemi_instance = Enemy_2.instantiate()
+		var chance = randi() % 100 + 0
+		if (chance < probability):
+			enemi_instance = Enemy_2.instantiate()
+		else:
+			enemi_instance = Enemy_1.instantiate()
+	var random_number = randi() % enemy_variants + 1
 	enemi_instance.connect("died", Callable(self, "_on_Enemy_died"))
 	enemi_instance.position = random_position
 	add_child(enemi_instance)

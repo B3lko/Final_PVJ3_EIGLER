@@ -132,4 +132,5 @@ func _on_area_damage_body_exited(body: Node2D) -> void:
 
 
 func _on_explosion_finished() -> void:
+	emit_signal("died")
 	queue_free()

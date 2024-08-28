@@ -77,10 +77,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -553.5
-offset_top = -82.0
-offset_right = 553.5
-offset_bottom = 254.0
+offset_left = -396.5
+offset_top = -64.0
+offset_right = 396.5
+offset_bottom = 272.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("2_eaa22")
@@ -89,7 +89,7 @@ theme = ExtResource("2_eaa22")
 layout_mode = 2
 theme_override_constants/h_separation = 40
 theme_override_constants/v_separation = 20
-columns = 5
+columns = 3
 
 [node name="Button_Level_01" type="Button" parent="CanvasLayer/PanelContainer/GridContainer" groups=["button"]]
 layout_mode = 2
@@ -129,32 +129,6 @@ text = "Level 06
 "
 icon = SubResource("ImageTexture_ccxxo")
 
-[node name="Button_Level_07" type="Button" parent="CanvasLayer/PanelContainer/GridContainer" groups=["button"]]
-layout_mode = 2
-theme = ExtResource("2_eaa22")
-text = "Level 07
-"
-icon = SubResource("ImageTexture_ccxxo")
-
-[node name="Button_Level_08" type="Button" parent="CanvasLayer/PanelContainer/GridContainer" groups=["button"]]
-layout_mode = 2
-theme = ExtResource("2_eaa22")
-text = "Level 08
-"
-icon = SubResource("ImageTexture_ccxxo")
-
-[node name="Button_Level_09" type="Button" parent="CanvasLayer/PanelContainer/GridContainer" groups=["button"]]
-layout_mode = 2
-theme = ExtResource("2_eaa22")
-text = "Level 09"
-icon = SubResource("ImageTexture_ccxxo")
-
-[node name="Button_Level_10" type="Button" parent="CanvasLayer/PanelContainer/GridContainer" groups=["button"]]
-layout_mode = 2
-theme = ExtResource("2_eaa22")
-text = "Level 10"
-icon = SubResource("ImageTexture_ccxxo")
-
 [node name="Button_Hover" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("5_63seo")
 bus = &"SFX"
@@ -163,3 +137,6 @@ bus = &"SFX"
 [connection signal="pressed" from="CanvasLayer/PanelContainer/GridContainer/Button_Level_01" to="." method="_on_button_level_01_pressed"]
 [connection signal="pressed" from="CanvasLayer/PanelContainer/GridContainer/Button_Level_02" to="." method="_on_button_level_02_pressed"]
 [connection signal="pressed" from="CanvasLayer/PanelContainer/GridContainer/Button_Level_03" to="." method="_on_button_level_03_pressed"]
+[connection signal="pressed" from="CanvasLayer/PanelContainer/GridContainer/Button_Level_04" to="." method="_on_button_level_04_pressed"]
+[connection signal="pressed" from="CanvasLayer/PanelContainer/GridContainer/Button_Level_05" to="." method="_on_button_level_05_pressed"]
+[connection signal="pressed" from="CanvasLayer/PanelContainer/GridContainer/Button_Level_06" to="." method="_on_button_level_06_pressed"]
