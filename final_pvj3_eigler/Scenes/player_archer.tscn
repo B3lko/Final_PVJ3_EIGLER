@@ -1,11 +1,10 @@
-[gd_scene load_steps=70 format=3 uid="uid://6b28wsuf3kpa"]
+[gd_scene load_steps=69 format=3 uid="uid://6b28wsuf3kpa"]
 
-[ext_resource type="Script" path="res://Scenes/player_archer.gd" id="1_ytuiq"]
+[ext_resource type="Script" path="res://Scripts/player_archer.gd" id="1_ytuiq"]
 [ext_resource type="Shader" path="res://Shaders/player.gdshader" id="2_amdh6"]
 [ext_resource type="Texture2D" uid="uid://4v6mv1p0mhu4" path="res://Assets/Sprites/Characters/Dead.png" id="4_dc2jk"]
+[ext_resource type="AudioStream" uid="uid://dq7oh0gik4ume" path="res://Assets/Audio/SFX/arrow.wav" id="5_0stot"]
 [ext_resource type="Texture2D" uid="uid://bplb3wrhffbdr" path="res://Assets/Sprites/Characters/Archer_Blue.png" id="5_3e33d"]
-[ext_resource type="AudioStream" uid="uid://bhbwd38m54b6a" path="res://Assets/Audio/SFX/zapsplat_warfare_sword_swing_fast_whoosh_blade_ring_001_43810.mp3" id="5_t7x3p"]
-[ext_resource type="AudioStream" uid="uid://doyfrr428y0u2" path="res://Assets/Audio/SFX/zapsplat_warfare_sword_swing_fast_whoosh_blade_ring_002_43811.mp3" id="6_cswrn"]
 [ext_resource type="AudioStream" uid="uid://bvj1awwmkao0" path="res://Assets/Audio/SFX/Player/Grass Running.wav" id="7_xdvj5"]
 [ext_resource type="AudioStream" uid="uid://c8aj3j7ywpqsp" path="res://Assets/Audio/SFX/Player/damage_1_sean.wav" id="8_5kvx5"]
 [ext_resource type="AudioStream" uid="uid://41io4so7ticb" path="res://Assets/Audio/SFX/Player/damage_2_sean.wav" id="9_yn0k7"]
@@ -462,13 +461,8 @@ debug_color = Color(0.847059, 0, 0.941176, 0.678431)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D_GetItems"]
 shape = SubResource("CircleShape2D_wwfbc")
 
-[node name="Sword_1" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("5_t7x3p")
-volume_db = -5.0
-bus = &"SFX"
-
-[node name="Sword_2" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("6_cswrn")
+[node name="arrow" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_0stot")
 volume_db = -5.0
 bus = &"SFX"
 

@@ -20,8 +20,7 @@ var force: Vector2
 var is_flashing = false
 @export var flash_duration = 0.2
 
-@onready var Sword_1 = $Sword_1
-@onready var Sword_2 = $Sword_2
+@onready var Arrow = $arrow
 @onready var Walk_Grass = $GrassWalk
 @onready var Scream1 = $Scream1
 @onready var Scream2 = $Scream2
@@ -121,11 +120,6 @@ func ShaderUpdate(delta):
 func attack():
 	if (Input.is_action_pressed("attack") && !isAttacking):
 		isAttacking = true
-		var random_number = randi() % 2 + 1
-		if(random_number == 1):
-			Sword_2.play()
-		else:
-			Sword_1.play()
 		if (direction == "up"):
 			animated_sprite.play("attack_up_01")
 		elif (direction == "down"):
@@ -181,6 +175,7 @@ func _on_animated_sprite_2d_animation_finished() -> void:
 	|| animated_sprite.animation == "attack_down_01"
 	|| animated_sprite.animation == "attack_up_01"):
 		shoot()
+		Arrow.play()		
 		isAttacking = false
 		animated_sprite.play("idle")	
 

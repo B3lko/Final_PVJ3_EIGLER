@@ -1,10 +1,13 @@
 extends Area2D
 
 @onready var Enemy_1 = load("res://Scenes/goblin_enemy.tscn")
+@onready var Enemy_2 = load("res://Scenes/barrel_enemy.tscn")
 @export var navigation_region_path: NodePath
 
 @export var living_enemies: int
 @export var wait_spawn = 3
+@export var enemy_variants: int
+
 var spawned = 0
 
 var ready_start = false
@@ -83,8 +86,13 @@ func _clean_up_timers() -> void:
 func spawn():
 	var random_position = get_random_point_in_region(get_node(navigation_region_path))
 	spawned += 1
-	var enemi_instance = Enemy_1.instantiate()
-	enemi_instance.connect("died", Callable(self, "_on_Enemy_died"))	
+	var random_number = randi() % enemy_variants + 1
+	var enemi_instance
+	if(random_number == 1):
+		enemi_instance = Enemy_1.instantiate()
+	else:
+		enemi_instance = Enemy_2.instantiate()
+	enemi_instance.connect("died", Callable(self, "_on_Enemy_died"))
 	enemi_instance.position = random_position
 	add_child(enemi_instance)
 

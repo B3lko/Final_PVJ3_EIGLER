@@ -680,6 +680,7 @@ use_edge_connections = false
 [node name="Enemy_Spawner" parent="." instance=ExtResource("36_h3v7v")]
 navigation_region_path = NodePath("../NavigationRegion2D")
 living_enemies = 6
+enemy_variants = 1
 
 [node name="Pause_On" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("37_1ckmj")

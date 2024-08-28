@@ -1,4 +1,4 @@
-[gd_scene load_steps=74 format=3 uid="uid://drnw6dfij57r5"]
+[gd_scene load_steps=75 format=3 uid="uid://drnw6dfij57r5"]
 
 [ext_resource type="Script" path="res://Scripts/level_01.gd" id="1_ftv88"]
 [ext_resource type="Texture2D" uid="uid://c0lu7yes65ugt" path="res://Assets/Sprites/Tiles/Tilemap_Elevation.png" id="2_01ppn"]
@@ -44,6 +44,7 @@
 [ext_resource type="AudioStream" uid="uid://bk6xqv202ch07" path="res://Assets/Audio/Music/Game_Over_1.wav" id="42_0tbtc"]
 [ext_resource type="AudioStream" uid="uid://bhgiw45kllwf" path="res://Assets/Audio/Music/Fanfare_3.wav" id="43_38rnm"]
 [ext_resource type="AudioStream" uid="uid://cgbs68lrvh5wb" path="res://Assets/Audio/Music/field_theme_2.wav" id="44_pgf38"]
+[ext_resource type="PackedScene" uid="uid://cyn6brrlqwnb4" path="res://Scenes/barrel_enemy.tscn" id="45_cjjso"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_qw0yp"]
 texture = ExtResource("2_01ppn")
@@ -394,7 +395,7 @@ outlines = Array[PackedVector2Array]([PackedVector2Array(-368, 431, -368, 749, 2
 [node name="Node2D" type="Node2D"]
 script = ExtResource("1_ftv88")
 scene_Level_next = null
-time_left = 90
+time_left = 60
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = SubResource("TileSet_87qnk")
@@ -679,7 +680,11 @@ use_edge_connections = false
 
 [node name="Enemy_Spawner" parent="." instance=ExtResource("37_yawh1")]
 navigation_region_path = NodePath("../NavigationRegion2D")
-living_enemies = 6
+living_enemies = 8
+enemy_variants = 2
+
+[node name="barrel_Enemy" parent="Enemy_Spawner" instance=ExtResource("45_cjjso")]
+position = Vector2(-1, 411)
 
 [node name="Pause_On" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("38_vowtu")
