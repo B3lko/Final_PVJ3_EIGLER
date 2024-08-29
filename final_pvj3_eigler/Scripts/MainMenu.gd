@@ -32,7 +32,7 @@ func btns_ready():
 		buttons[current_button_index].grab_focus()
 
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	gp_process()
 
 

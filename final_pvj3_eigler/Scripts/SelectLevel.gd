@@ -22,7 +22,7 @@ func _ready():
 			button.connect("mouse_entered", Callable(self, "_on_button_mouse_entered"))
 
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	gp_process()
 
 

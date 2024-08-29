@@ -21,6 +21,8 @@ var unique_material : ShaderMaterial
 @onready var Steak = load("res://Scenes/steak.tscn")
 @export var probability = 30
 
+@export var dist = 50
+
 signal died
 @onready var Attack_1 = $Attack_1
 @onready var Attack_2 = $Attack_2
@@ -57,9 +59,11 @@ func move(delta):
 		if (velocity.x > 0):
 			animated_sprite.scale.x = 1;			
 		move_and_slide()
-		if global_position.distance_to(player.position) < 10:
+		if global_position.distance_to(player.position) < dist:
 			moving = false
 			velocity = Vector2.ZERO
+	elif global_position.distance_to(player.position) > dist:
+		moving = true
 
 
 func GetDamage(gdamage):
@@ -124,7 +128,6 @@ func _on_animated_sprite_2d_animation_finished() -> void:
 	animated_sprite.animation == "Down_Attack"):
 		if (canAttack):
 			player.GetDamage(damage)
-		#animated_sprite.play("Idle")
 		animated_sprite.play("walk")
 		isAttacking = false
 

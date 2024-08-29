@@ -194,9 +194,8 @@ func _on_animated_sprite_2d_animation_finished() -> void:
 	|| animated_sprite.animation == "attack_up_02"):
 		for body in enemies_in_area:
 			if body.has_method("GetDamage"):
-				#Sword_1.play()
 				body.GetDamage(m_damage)
-				body.velocity += force				
+				body.velocity += force
 		isAttacking = false
 		animated_sprite.play("idle")	
 

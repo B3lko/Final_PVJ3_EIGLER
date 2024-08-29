@@ -6,7 +6,6 @@ var bus_index: int
 var config_file_path: String = "user://audio_settings.json"
 
 func _ready() -> void:
-	print(bus_name)
 	bus_index = AudioServer.get_bus_index(bus_name)
 	var config = load_audio_settings()
 	if bus_name in config:

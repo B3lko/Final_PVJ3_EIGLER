@@ -1,17 +1,17 @@
 extends CharacterBody2D
 
+#exports
+@export var damage = 50
+@export var wait_explode = 3
+@export var follow_time = 5
+@export var SPEED = 11000
 
 var player: Node = null
 @onready var animated_sprite = $AnimatedSprite2D
-@export var damage = 50
 var pause_or_end = false
-
-@export var wait_explode = 3
-@export var follow_time = 5
 
 @onready var nav: NavigationAgent2D = $NavigationAgent2D
 var moving = true
-@export var SPEED = 11000
 
 @onready var sfx_explosion = $Explosion
 

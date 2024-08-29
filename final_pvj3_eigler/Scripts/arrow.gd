@@ -1,11 +1,13 @@
 extends Area2D
 
+#Exports
+@export var speed = 200
+@export var damage = 20
+
 var performer
 var angle 
-var speed = 200
 var isInited = false
 var toDestroy = false
-var damage = 20
 
 func init(ang, posX, posY, nameP):
 	var sprite = $Sprite2D

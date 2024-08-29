@@ -516,15 +516,15 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -151.0
-offset_top = -168.0
-offset_right = 151.0
-offset_bottom = -60.0
+offset_left = -139.5
+offset_top = -155.0
+offset_right = 139.5
+offset_bottom = -70.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_fonts/font = ExtResource("35_4ljtd")
 theme_override_font_sizes/font_size = 80
-text = "¡You lost!"
+text = "You lost!"
 
 [node name="GridContainer" type="GridContainer" parent="CanvasLayer/ColorRect/TextureRectLose"]
 layout_mode = 1
@@ -576,15 +576,15 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -134.5
-offset_top = -165.0
-offset_right = 134.5
-offset_bottom = -57.0
+offset_left = -123.0
+offset_top = -160.0
+offset_right = 123.0
+offset_bottom = -75.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_fonts/font = ExtResource("35_4ljtd")
 theme_override_font_sizes/font_size = 80
-text = "¡You win!"
+text = "You win!"
 
 [node name="GridContainer" type="GridContainer" parent="CanvasLayer/ColorRect/TextureRectWin"]
 layout_mode = 1

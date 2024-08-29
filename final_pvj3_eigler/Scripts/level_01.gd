@@ -3,6 +3,7 @@ extends Node2D
 #Varian entre niveles
 @export var scene_Level_next: PackedScene
 @export var time_left: int
+@export var cursor_speed = 400.0
 
 var scene_Main_Menu = load("res://Scenes/MainMenu.tscn")
 
@@ -32,7 +33,6 @@ var current_button_index: int = 0
 
 var aux = true
 
-var cursor_speed = 400.0
 
 func _ready() -> void:
 	update_active_buttons()
